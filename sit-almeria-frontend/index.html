@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIT - ALMERÍA | Sistema Inteligente de Transporte</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!--              COMPONENTE: HEADER              -->
+    <!-- ============================================ -->
+    <template id="header-template">
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo" onclick="showPage('inicio')">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Fondo circular -->
+                        <circle cx="50" cy="50" r="48" fill="#6CABEF"/>
+
+                        <!-- Autobús -->
+                        <g transform="translate(20, 30)">
+                            <!-- Carrocería principal -->
+                            <rect x="5" y="8" width="50" height="32" rx="6" fill="#FFFFFF"/>
+
+                            <!-- Parabrisas -->
+                            <rect x="10" y="13" width="18" height="12" rx="2" fill="#60B3EB"/>
+                            <rect x="32" y="13" width="18" height="12" rx="2" fill="#60B3EB"/>
+
+                            <!-- Ventanas laterales -->
+                            <rect x="10" y="28" width="8" height="8" rx="1" fill="#60B3EB"/>
+                            <rect x="22" y="28" width="8" height="8" rx="1" fill="#60B3EB"/>
+                            <rect x="34" y="28" width="8" height="8" rx="1" fill="#60B3EB"/>
+
+                            <!-- Ruedas -->
+                            <circle cx="15" cy="42" r="5" fill="#4D4D4D"/>
+                            <circle cx="15" cy="42" r="3" fill="#EBED7E"/>
+                            <circle cx="45" cy="42" r="5" fill="#4D4D4D"/>
+                            <circle cx="45" cy="42" r="3" fill="#EBED7E"/>
+
+                            <!-- Detalles frontales -->
+                            <rect x="5" y="12" width="3" height="4" rx="1" fill="#EBED7E"/>
+                            <rect x="52" y="12" width="3" height="4" rx="1" fill="#EBED7E"/>
+
+                            <!-- Puerta -->
+                            <rect x="8" y="28" width="1.5" height="10" fill="#4D4D4D" opacity="0.3"/>
+                        </g>
+
+                        <!-- Borde del círculo -->
+                        <circle cx="50" cy="50" r="48" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="site-title">SIT - ALMERÍA</h1>
+        </header>
+    </template>
+
+    <!-- ============================================ -->
+    <!--            COMPONENTE: NAVBAR                -->
+    <!-- ============================================ -->
+    <template id="navbar-template">
+        <nav class="navbar">
+            <button class="nav-button" onclick="showPage('info-alsa')">Info ALSA</button>
+            <button class="nav-button" onclick="showPage('lineas')">Líneas y Paradas</button>
+            <button class="nav-button" onclick="showPage('bonos')">Bonos</button>
+            <button class="nav-button" onclick="showPage('avisos')">Avisos y Noticias</button>
+            <button class="nav-button" onclick="showPage('recarga')">Recargas</button>
+            <button class="nav-button" onclick="showPage('mensajes')">Mensajes</button>
+            <button class="nav-button" onclick="showPage('mapa')">Mapa</button>
+            <button class="nav-button" onclick="showPage('planificador')">Planificador de viajes</button>
+            <button class="nav-button" onclick="showPage('favoritos')">Favoritos</button>
+            <button class="nav-button user-button" onclick="showPage('perfil')">
+                <svg class="user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </button>
+        </nav>
+    </template>
+
+    <!-- ============================================ -->
+    <!--            COMPONENTE: FOOTER                -->
+    <!-- ============================================ -->
+    <template id="footer-template">
+        <footer class="footer">
+            <p>SIT-Almería &copy; 2025 | Sistema Inteligente de Transporte Urbano</p>
+        </footer>
+    </template>
+
+    <!-- ============================================ -->
+    <!--            PÁGINA: INICIO                    -->
+    <!-- ============================================ -->
+    <section id="inicio" class="page active">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="main-content">
+            <div class="carousel-container">
+                <button class="carousel-button prev" id="prevBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="carousel">
+                    <div class="carousel-slide active">
+                        <div class="carousel-content">
+                            <h2>Bienvenido a SIT-Almería</h2>
+                            <p>Tu sistema inteligente de transporte urbano</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="carousel-content">
+                            <h2>Consulta horarios en tiempo real</h2>
+                            <p>Información actualizada de todas las líneas</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="carousel-content">
+                            <h2>Planifica tu viaje</h2>
+                            <p>Encuentra la mejor ruta para tu destino</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-button next" id="nextBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="content-block">
+                <h3>Accesos rápidos</h3>
+                <div class="quick-access-grid">
+                    <div class="quick-access-card" onclick="showPage('planificador')">
+                        <h4>Planificar viaje</h4>
+                        <p>Calcula tu ruta</p>
+                    </div>
+                    <div class="quick-access-card" onclick="showPage('lineas')">
+                        <h4>Consultar líneas</h4>
+                        <p>Horarios y paradas</p>
+                    </div>
+                    <div class="quick-access-card" onclick="showPage('bonos')">
+                        <h4>Ver bonos</h4>
+                        <p>Tipos y precios</p>
+                    </div>
+                    <div class="quick-access-card" onclick="showPage('recarga')">
+                        <h4>Recargar tarjeta</h4>
+                        <p>Online y seguro</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--        PÁGINA: LÍNEAS Y PARADAS              -->
+    <!-- ============================================ -->
+    <section id="lineas" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="page-content">
+            <div class="page-title">
+                <h2>Líneas y Paradas</h2>
+                <p>Consulta todas las líneas del servicio</p>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="lineas-search" class="search-input" placeholder="Buscar línea por nombre o número...">
+            </div>
+
+            <div class="lineas-grid" id="lineas-list">
+                <!-- Las líneas se cargarán dinámicamente desde data.js -->
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--        PÁGINA: DETALLE DE LÍNEA              -->
+    <!-- ============================================ -->
+    <section id="linea-detalle" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="page-content">
+            <button class="btn-back" onclick="showPage('lineas')">← Volver a Líneas</button>
+
+            <div class="linea-info" id="linea-info-container">
+                <!-- Se carga dinámicamente -->
+            </div>
+
+            <div class="paradas-section">
+                <h3>Paradas de esta línea</h3>
+                <div class="paradas-list" id="paradas-list">
+                    <!-- Se carga dinámicamente -->
+                </div>
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--            PÁGINA: BONOS                     -->
+    <!-- ============================================ -->
+    <section id="bonos" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="page-content">
+            <div class="page-title">
+                <h2>Bonos y Tarifas</h2>
+                <p>Consulta los bonos disponibles</p>
+            </div>
+
+            <div class="bonos-grid" id="bonos-list">
+                <!-- Los bonos se cargarán dinámicamente -->
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--        PÁGINA: AVISOS Y NOTICIAS             -->
+    <!-- ============================================ -->
+    <section id="avisos" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="page-content">
+            <div class="page-title">
+                <h2>Avisos y Noticias</h2>
+                <p>Últimas novedades e incidencias del servicio</p>
+            </div>
+
+            <div class="avisos-list" id="avisos-list">
+                <!-- Los avisos se cargarán dinámicamente -->
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--            PÁGINA: MAPA                      -->
+    <!-- ============================================ -->
+    <section id="mapa" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="page-content">
+            <div class="page-title">
+                <h2>Mapa de Líneas</h2>
+                <p>Visualiza todas las rutas del servicio</p>
+            </div>
+
+            <div class="mapa-container">
+                <div class="mapa-placeholder">
+                    <p>Mapa completo de líneas y paradas</p>
+                    <small>Última actualización: 15/11/2025</small>
+                </div>
+            </div>
+
+            <div class="mapa-leyenda">
+                <h3>Leyenda</h3>
+                <div class="leyenda-items">
+                    <div class="leyenda-item">
+                        <span class="color-box" style="background: #FF6B6B"></span>
+                        <span>Línea 1</span>
+                    </div>
+                    <div class="leyenda-item">
+                        <span class="color-box" style="background: #4ECDC4"></span>
+                        <span>Línea 2</span>
+                    </div>
+                    <div class="leyenda-item">
+                        <span class="color-box" style="background: #45B7D1"></span>
+                        <span>Línea 3</span>
+                    </div>
+                    <div class="leyenda-item">
+                        <span class="color-box" style="background: #FFA07A"></span>
+                        <span>Línea 4</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--        PÁGINA: PLANIFICADOR                  -->
+    <!-- ============================================ -->
+    <section id="planificador" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="page-content">
+            <div class="page-title">
+                <h2>Planificador de Viajes</h2>
+                <p>Encuentra la mejor ruta para tu destino</p>
+            </div>
+
+            <div class="planificador-form">
+                <div class="form-group">
+                    <label>Origen</label>
+                    <input type="text" id="origen-input" class="form-input" placeholder="Ej: Puerta de Purchena">
+                </div>
+
+                <div class="form-group">
+                    <label>Destino</label>
+                    <input type="text" id="destino-input" class="form-input" placeholder="Ej: Universidad">
+                </div>
+
+                <button class="btn-primary" onclick="buscarRuta()">Buscar Rutas</button>
+            </div>
+
+            <div class="resultados-container" id="resultados-rutas" style="display: none;">
+                <h3>Rutas disponibles</h3>
+                <div class="rutas-list" id="rutas-list">
+                    <!-- Se carga dinámicamente -->
+                </div>
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--            PÁGINA: FAVORITOS                 -->
+    <!-- ============================================ -->
+    <section id="favoritos" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="page-content">
+            <div class="page-title">
+                <h2>Mis Favoritos</h2>
+                <p>Paradas y líneas guardadas</p>
+            </div>
+
+            <div class="favoritos-list" id="favoritos-list">
+                <!-- Los favoritos se cargarán dinámicamente -->
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--            PÁGINA: PERFIL                    -->
+    <!-- ============================================ -->
+    <section id="perfil" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="page-content">
+            <div class="page-title">
+                <h2>Mi Perfil</h2>
+                <p>Información personal y saldo</p>
+            </div>
+
+            <div class="perfil-container">
+                <div class="perfil-card">
+                    <h3>Datos personales</h3>
+                    <div class="perfil-info">
+                        <div class="info-row">
+                            <span class="label">Nombre:</span>
+                            <span class="value" id="perfil-nombre">María García López</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Email:</span>
+                            <span class="value" id="perfil-email">maria.garcia@example.com</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Teléfono:</span>
+                            <span class="value" id="perfil-telefono">650 123 456</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Tarjeta asociada:</span>
+                            <span class="value" id="perfil-tarjeta">TC98765432</span>
+                        </div>
+                    </div>
+                    <button class="btn-secondary">Editar perfil</button>
+                </div>
+
+                <div class="perfil-card">
+                    <h3>Saldo y bonos</h3>
+                    <div class="saldo-info">
+                        <div class="saldo-amount">
+                            <span class="label">Saldo disponible:</span>
+                            <span class="amount" id="perfil-saldo">15,75 €</span>
+                        </div>
+                        <div class="bonos-activos">
+                            <span class="label">Bonos activos:</span>
+                            <ul id="perfil-bonos">
+                                <li>Bono Mensual</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="perfil-actions">
+                    <button class="btn-secondary" onclick="showPage('recarga')">Recargar tarjeta</button>
+                    <button class="btn-secondary" onclick="showPage('inicio')">Cerrar sesión</button>
+                </div>
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--            PÁGINA: RECARGA                   -->
+    <!-- ============================================ -->
+    <section id="recarga" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="page-content">
+            <div class="page-title">
+                <h2>Recarga de Tarjeta</h2>
+                <p>Recarga tu tarjeta de forma segura</p>
+            </div>
+
+            <div class="recarga-form">
+                <div class="form-group">
+                    <label>Tarjeta asociada</label>
+                    <input type="text" class="form-input" value="TC98765432" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>Importe a recargar</label>
+                    <input type="number" id="importe-recarga" class="form-input" placeholder="Ej: 20.00" min="5" max="100" step="0.50">
+                </div>
+
+                <div class="form-group">
+                    <label>Método de pago</label>
+                    <select class="form-input" id="metodo-pago">
+                        <option value="tarjeta">Tarjeta bancaria</option>
+                        <option value="bizum">Bizum</option>
+                        <option value="paypal">PayPal</option>
+                    </select>
+                </div>
+
+                <div class="info-box">
+                    <p>La operación se realizará en una pasarela de pago segura.</p>
+                </div>
+
+                <button class="btn-primary" onclick="procesarRecarga()">Continuar al pago</button>
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--            PÁGINA: MENSAJES                  -->
+    <!-- ============================================ -->
+    <section id="mensajes" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="page-content">
+            <div class="page-title">
+                <h2>Contacto</h2>
+                <p>Envíanos tu consulta o sugerencia</p>
+            </div>
+
+            <div class="mensajes-form">
+                <div class="form-group">
+                    <label>Asunto</label>
+                    <input type="text" id="mensaje-asunto" class="form-input" placeholder="Ej: Consulta sobre bonos">
+                </div>
+
+                <div class="form-group">
+                    <label>Mensaje</label>
+                    <textarea id="mensaje-texto" class="form-textarea" rows="8" placeholder="Escribe tu mensaje aquí..."></textarea>
+                </div>
+
+                <button class="btn-primary" onclick="enviarMensaje()">Enviar mensaje</button>
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--            PÁGINA: INFO ALSA                 -->
+    <!-- ============================================ -->
+    <section id="info-alsa" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="info-alsa-content">
+            <section class="section-conocenos">
+                <div class="hero-banner">
+                    <h2>CONÓCENOS</h2>
+                </div>
+            </section>
+
+            <section class="section-historia">
+                <div class="two-column-layout">
+                    <div class="column image-column">
+                        <div class="image-placeholder">
+                            <span>Imagen</span>
+                        </div>
+                    </div>
+                    <div class="column content-column">
+                        <div class="content-card">
+                            <h3>HISTORIA DE ALSA</h3>
+                            <div class="text-content">
+                                <p>ALSA es una empresa líder en transporte de viajeros en España, con más de 100 años de experiencia en el sector.</p>
+                                <p>Fundada en 1923, ha evolucionado constantemente para ofrecer servicios de calidad adaptados a las necesidades de movilidad de los ciudadanos.</p>
+                                <p>En Almería, ALSA gestiona el servicio de autobuses urbanos bajo la marca SURBUS, conectando toda la ciudad con una flota moderna y sostenible.</p>
+                                <p>Nuestro compromiso es facilitar el transporte público eficiente, accesible y respetuoso con el medio ambiente.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-servicios">
+                <div class="two-column-layout reverse">
+                    <div class="column content-column">
+                        <div class="content-card">
+                            <h3>SERVICIOS Y OBJETIVOS</h3>
+                            <div class="text-content">
+                                <p><strong>Nuestros Servicios:</strong></p>
+                                <p>- 15 líneas de autobuses urbanos que conectan toda la ciudad</p>
+                                <p>- Flota de 53 vehículos modernos y accesibles</p>
+                                <p>- Sistema de información en tiempo real</p>
+                                <p>- Bonos y tarifas adaptadas a diferentes necesidades</p>
+                                <p><strong>Nuestros Objetivos:</strong></p>
+                                <p>- Promover la movilidad sostenible en Almería</p>
+                                <p>- Ofrecer un servicio puntual, seguro y de calidad</p>
+                                <p>- Facilitar el acceso al transporte público para todos los ciudadanos</p>
+                                <p>- Reducir el impacto ambiental mediante vehículos eco-eficientes</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column image-column">
+                        <div class="image-placeholder">
+                            <span>Imagen</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-contacto">
+                <div class="contacto-container">
+                    <h3>Contacto</h3>
+                    <p class="contacto-subtitle">Para más información:</p>
+
+                    <div class="contacto-list">
+                        <div class="contacto-item">
+                            <div class="contacto-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                            </div>
+                            <span>950 123 456</span>
+                        </div>
+
+                        <div class="contacto-item">
+                            <div class="contacto-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                            </div>
+                            <span>info@sit-almeria.es</span>
+                        </div>
+
+                        <div class="contacto-item">
+                            <div class="contacto-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                                </svg>
+                            </div>
+                            <span>@SITAlmeria</span>
+                        </div>
+                    </div>
+
+                    <button class="btn-volver" onclick="showPage('inicio')">Volver</button>
+                </div>
+            </section>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/dialogs.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
