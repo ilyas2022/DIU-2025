@@ -537,20 +537,330 @@ function cargarPerfil() {
 
 // U-082: Cerrar sesión con confirmación
 async function cerrarSesion() {
-    const confirmar = await dialogSystem.confirmarCerrarSesion();
+    const confirmar = await new Promise((resolve) => {
+        dialogSystem.showDialog({
+            title: 'Cerrar sesión',
+            message: '¿Estás seguro de que quieres cerrar sesión?\n\nSerás redirigido a la página de inicio de sesión.',
+            confirmText: 'Cerrar sesión',
+            cancelText: 'Cancelar',
+            onConfirm: () => resolve(true),
+            onCancel: () => resolve(false)
+        });
+    });
 
     if (confirmar) {
         // Simular cierre de sesión
         dialogSystem.showDialog({
             title: 'Sesión cerrada',
-            message: 'Has cerrado sesión correctamente.',
+            message: 'Has cerrado sesión correctamente.\n\nRedirigiendo al inicio de sesión...',
             type: 'success',
+            confirmText: 'Aceptar',
             onConfirm: () => {
-                showPage('inicio');
+                showPage('login');
             }
         });
     }
 }
+
+// ========== AUTENTICACIÓN ==========
+
+// U-000: Iniciar sesión con validación
+async function iniciarSesion() {
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
+
+    // Limpiar errores previos
+    emailInput.parentElement.classList.remove('error');
+    passwordInput.parentElement.classList.remove('error');
+
+    const emailError = emailInput.parentElement.querySelector('.validation-message');
+    const passwordError = passwordInput.parentElement.querySelector('.validation-message');
+    if (emailError) emailError.remove();
+    if (passwordError) passwordError.remove();
+
+    let valid = true;
+
+    // Validar email
+    if (!emailInput.value.trim()) {
+        mostrarError(emailInput.parentElement, 'El correo electrónico es obligatorio');
+        valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+        mostrarError(emailInput.parentElement, 'Introduce un correo electrónico válido');
+        valid = false;
+    }
+
+    // Validar contraseña
+    if (!passwordInput.value) {
+        mostrarError(passwordInput.parentElement, 'La contraseña es obligatoria');
+        valid = false;
+    }
+
+    if (!valid) return;
+
+    // Simular autenticación exitosa
+    dialogSystem.showDialog({
+        title: 'Sesión iniciada',
+        message: 'Has iniciado sesión correctamente.\n\n¡Bienvenido a SIT-Almería!',
+        type: 'success',
+        confirmText: 'Continuar',
+        onConfirm: () => {
+            emailInput.value = '';
+            passwordInput.value = '';
+            showPage('inicio');
+        }
+    });
+}
+
+// U-013: Crear cuenta con validación completa
+async function crearCuenta() {
+    const nombreInput = document.getElementById('registro-nombre');
+    const emailInput = document.getElementById('registro-email');
+    const passwordInput = document.getElementById('registro-password');
+    const confirmPasswordInput = document.getElementById('registro-confirm-password');
+
+    // Limpiar errores previos
+    [nombreInput, emailInput, passwordInput, confirmPasswordInput].forEach(input => {
+        input.parentElement.classList.remove('error');
+        const errorEl = input.parentElement.querySelector('.validation-message');
+        if (errorEl) errorEl.remove();
+    });
+
+    let valid = true;
+
+    // Validar nombre
+    if (!nombreInput.value.trim()) {
+        mostrarError(nombreInput.parentElement, 'El nombre completo es obligatorio');
+        valid = false;
+    } else if (nombreInput.value.trim().length < 3) {
+        mostrarError(nombreInput.parentElement, 'El nombre debe tener al menos 3 caracteres');
+        valid = false;
+    }
+
+    // Validar email
+    if (!emailInput.value.trim()) {
+        mostrarError(emailInput.parentElement, 'El correo electrónico es obligatorio');
+        valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+        mostrarError(emailInput.parentElement, 'Introduce un correo electrónico válido');
+        valid = false;
+    }
+
+    // Validar contraseña
+    if (!passwordInput.value) {
+        mostrarError(passwordInput.parentElement, 'La contraseña es obligatoria');
+        valid = false;
+    } else if (passwordInput.value.length < 8) {
+        mostrarError(passwordInput.parentElement, 'La contraseña debe tener mínimo 8 caracteres');
+        valid = false;
+    }
+
+    // Validar confirmación de contraseña
+    if (!confirmPasswordInput.value) {
+        mostrarError(confirmPasswordInput.parentElement, 'Confirma tu contraseña');
+        valid = false;
+    } else if (passwordInput.value !== confirmPasswordInput.value) {
+        mostrarError(confirmPasswordInput.parentElement, 'Las contraseñas no coinciden');
+        valid = false;
+    }
+
+    if (!valid) return;
+
+    // Confirmar creación de cuenta
+    const confirmar = await new Promise((resolve) => {
+        dialogSystem.showDialog({
+            title: 'Crear cuenta',
+            message: `¿Confirmar registro con el correo:\n${emailInput.value}?`,
+            confirmText: 'Crear cuenta',
+            cancelText: 'Cancelar',
+            onConfirm: () => resolve(true),
+            onCancel: () => resolve(false)
+        });
+    });
+
+    if (!confirmar) return;
+
+    // Simular creación de cuenta
+    dialogSystem.showDialog({
+        title: 'Cuenta Creada',
+        message: 'Tu cuenta ha sido creada exitosamente.\n\nSe ha enviado un correo de confirmación a tu dirección de email.',
+        type: 'success',
+        confirmText: 'Ir a iniciar sesión',
+        onConfirm: () => {
+            nombreInput.value = '';
+            emailInput.value = '';
+            passwordInput.value = '';
+            confirmPasswordInput.value = '';
+            showPage('login');
+        }
+    });
+}
+
+// U-005: Recuperar contraseña con validación
+async function recuperarContrasena() {
+    const emailInput = document.getElementById('recuperar-email');
+
+    // Limpiar errores previos
+    emailInput.parentElement.classList.remove('error');
+    const errorEl = emailInput.parentElement.querySelector('.validation-message');
+    if (errorEl) errorEl.remove();
+
+    // Validar email
+    if (!emailInput.value.trim()) {
+        mostrarError(emailInput.parentElement, 'El correo electrónico es obligatorio');
+        return;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+        mostrarError(emailInput.parentElement, 'Introduce un correo electrónico válido');
+        return;
+    }
+
+    // Confirmar envío
+    const confirmar = await new Promise((resolve) => {
+        dialogSystem.showDialog({
+            title: 'Recuperar contraseña',
+            message: `¿Enviar instrucciones de recuperación a:\n${emailInput.value}?`,
+            confirmText: 'Enviar',
+            cancelText: 'Cancelar',
+            onConfirm: () => resolve(true),
+            onCancel: () => resolve(false)
+        });
+    });
+
+    if (!confirmar) return;
+
+    // Simular envío de correo
+    dialogSystem.showDialog({
+        title: 'Instrucciones Enviadas',
+        message: `Se han enviado las instrucciones para recuperar tu contraseña al correo:\n\n${emailInput.value}\n\nRevisa tu bandeja de entrada y sigue las instrucciones.`,
+        type: 'success',
+        confirmText: 'Entendido',
+        onConfirm: () => {
+            emailInput.value = '';
+            showPage('login');
+        }
+    });
+}
+
+// ========== EDICIÓN DE PERFIL ==========
+
+// Editar perfil - Función global
+window.editarPerfil = function() {
+    console.log('Función editarPerfil llamada');
+
+    const nombreEl = document.getElementById('perfil-nombre');
+    const emailEl = document.getElementById('perfil-email');
+    const telefonoEl = document.getElementById('perfil-telefono');
+
+    if (!nombreEl || !emailEl || !telefonoEl) {
+        console.error('No se encontraron los elementos del perfil');
+        alert('Error: No se pudieron cargar los datos del perfil');
+        return;
+    }
+
+    const nombre = nombreEl.textContent;
+    const email = emailEl.textContent;
+    const telefono = telefonoEl.textContent;
+
+    console.log('Datos del perfil:', {nombre, email, telefono});
+
+    // Crear formulario de edición
+    const formHtml = `
+        <div class="form-group">
+            <label>Nombre completo</label>
+            <input type="text" id="edit-nombre" class="form-input" value="${nombre}">
+        </div>
+        <div class="form-group">
+            <label>Correo electrónico</label>
+            <input type="email" id="edit-email" class="form-input" value="${email}">
+        </div>
+        <div class="form-group">
+            <label>Teléfono</label>
+            <input type="tel" id="edit-telefono" class="form-input" value="${telefono}">
+        </div>
+    `;
+
+    // Mostrar diálogo de edición personalizado
+    const dialog = document.createElement('div');
+    dialog.className = 'dialog-overlay';
+    dialog.innerHTML = `
+        <div class="dialog">
+            <h3>Editar Perfil</h3>
+            ${formHtml}
+            <div class="dialog-actions">
+                <button class="btn-secondary" onclick="cerrarDialogoEdicion()">Cancelar</button>
+                <button class="btn-primary" onclick="guardarCambiosPerfil()">Guardar cambios</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(dialog);
+
+    console.log('Diálogo de edición creado');
+};
+
+// Cerrar diálogo de edición
+window.cerrarDialogoEdicion = function() {
+    const overlay = document.querySelector('.dialog-overlay');
+    if (overlay) {
+        overlay.remove();
+    }
+};
+
+// Guardar cambios del perfil - Función global
+window.guardarCambiosPerfil = function() {
+    console.log('Guardando cambios del perfil...');
+
+    const nuevoNombre = document.getElementById('edit-nombre').value.trim();
+    const nuevoEmail = document.getElementById('edit-email').value.trim();
+    const nuevoTelefono = document.getElementById('edit-telefono').value.trim();
+
+    console.log('Nuevos datos:', {nuevoNombre, nuevoEmail, nuevoTelefono});
+
+    // Validaciones básicas
+    if (!nuevoNombre || !nuevoEmail || !nuevoTelefono) {
+        alert('Todos los campos son obligatorios');
+        return;
+    }
+
+    if (nuevoNombre.length < 3) {
+        alert('El nombre debe tener al menos 3 caracteres');
+        return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(nuevoEmail)) {
+        alert('Introduce un correo electrónico válido');
+        return;
+    }
+
+    // Actualizar datos en la interfaz
+    document.getElementById('perfil-nombre').textContent = nuevoNombre;
+    document.getElementById('perfil-email').textContent = nuevoEmail;
+    document.getElementById('perfil-telefono').textContent = nuevoTelefono;
+
+    // Actualizar datos en memoria
+    if (typeof sitData !== 'undefined' && sitData.usuario) {
+        sitData.usuario.nombre = nuevoNombre;
+        sitData.usuario.email = nuevoEmail;
+        sitData.usuario.telefono = nuevoTelefono;
+    }
+
+    // Cerrar diálogo
+    const overlay = document.querySelector('.dialog-overlay');
+    if (overlay) {
+        overlay.remove();
+    }
+
+    // Mostrar confirmación
+    if (typeof dialogSystem !== 'undefined') {
+        dialogSystem.showDialog({
+            title: 'Perfil actualizado',
+            message: 'Tus datos han sido actualizados correctamente.',
+            type: 'success'
+        });
+    } else {
+        alert('Perfil actualizado correctamente');
+    }
+
+    console.log('Cambios guardados exitosamente');
+};
 
 // ========== UTILIDADES ==========
 
@@ -573,3 +883,6 @@ window.buscarRuta = buscarRuta;
 window.procesarRecarga = procesarRecarga;
 window.enviarMensaje = enviarMensaje;
 window.cerrarSesion = cerrarSesion;
+window.iniciarSesion = iniciarSesion;
+window.crearCuenta = crearCuenta;
+window.recuperarContrasena = recuperarContrasena;

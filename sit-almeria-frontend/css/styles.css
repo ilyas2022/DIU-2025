@@ -196,9 +196,16 @@ body {
     max-width: 80px;
 }
 
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
 .user-icon {
     width: 24px;
     height: 24px;
+    flex-shrink: 0;
 }
 
 /* ========================================================= */
@@ -279,24 +286,48 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: var(--sombra-tarjeta);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
 .quick-access-card:hover {
-    background-color: var(--color-acento); /* C06 */
+    background-color: var(--color-principal); /* C04 */
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    border-color: var(--color-principal);
+}
+
+.quick-access-card:hover h4,
+.quick-access-card:hover p,
+.quick-access-card:hover .quick-icon {
+    color: var(--color-fondo-blanco);
+    stroke: var(--color-fondo-blanco);
+}
+
+.quick-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--color-principal);
+    stroke: var(--color-principal);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .quick-access-card h4 {
     font-size: var(--texto-subtitulo);
     font-weight: 600;
-    margin-bottom: 8px;
+    margin: 0;
     color: var(--color-texto-primario);
+    transition: all 0.3s ease;
 }
 
 .quick-access-card p {
     font-size: var(--texto-normal);
     color: var(--color-texto-secundario);
+    margin: 0;
+    transition: all 0.3s ease;
 }
 
 /* ========================================================= */
@@ -335,6 +366,8 @@ body {
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--color-principal), var(--color-menu));
+    background-size: cover;
+    background-position: center;
 }
 
 .carousel-slide.active {
@@ -345,6 +378,8 @@ body {
     text-align: center;
     padding: var(--margen-bloques);
     color: var(--color-fondo-blanco);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 1;
 }
 
 .carousel-content h2 {
@@ -522,7 +557,10 @@ body {
 
 .planificador-form,
 .recarga-form,
-.mensajes-form {
+.mensajes-form,
+.login-form,
+.registro-form,
+.recuperar-form {
     background-color: var(--color-fondo-blanco); /* C02 */
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: var(--border-radius);
@@ -530,6 +568,26 @@ body {
     max-width: 600px;
     margin: 0 auto;
     box-shadow: var(--sombra-tarjeta);
+}
+
+.login-links {
+    text-align: center;
+    margin-top: var(--margen-bloques);
+}
+
+.login-links a {
+    color: var(--color-principal);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+.login-links span {
+    display: block;
+    margin-top: 12px;
 }
 
 .form-group {
@@ -1440,4 +1498,555 @@ body {
     color: var(--color-texto-secundario);
     margin-top: 8px;
     font-style: italic;
+}
+
+/* ========================================================= */
+/*                    PÁGINA DE AYUDA / FAQ                  */
+/* ========================================================= */
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margen-bloques);
+    margin-top: var(--margen-bloques);
+}
+
+.faq-item {
+    background-color: var(--color-fondo-blanco);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--color-principal);
+    border-radius: var(--border-radius);
+    padding: var(--margen-bloques);
+    box-shadow: var(--sombra-tarjeta);
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.faq-item h3 {
+    font-size: var(--texto-subtitulo);
+    font-weight: 600;
+    color: var(--color-texto-primario);
+    margin-bottom: 12px;
+}
+
+.faq-item p {
+    font-size: var(--texto-normal);
+    color: var(--color-texto-secundario);
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.faq-item ul {
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.faq-item li {
+    font-size: var(--texto-normal);
+    color: var(--color-texto-secundario);
+    margin-bottom: 4px;
+}
+
+/* ========================================================= */
+/*                    MEDIA QUERIES (RESPONSIVE)             */
+/* ========================================================= */
+
+/* Tablets y dispositivos medianos */
+@media screen and (max-width: 1024px) {
+    .navbar {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-button {
+        font-size: var(--texto-pequeno);
+        padding: 8px;
+        min-width: 100px;
+    }
+
+    .nav-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .quick-access-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .two-column-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .image-column {
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .two-column-layout.reverse .image-column {
+        border-left: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Móviles */
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 12px;
+        top: 0;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .site-title {
+        font-size: 1.25rem;
+    }
+
+    .navbar {
+        position: sticky;
+        top: 84px;
+        min-height: 50px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+
+    .navbar::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .navbar::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 2px;
+    }
+
+    .nav-button {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+        min-width: 90px;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .nav-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .page-content {
+        padding: 12px;
+    }
+
+    .page-title h2 {
+        font-size: var(--titulo-movil);
+    }
+
+    .quick-access-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .carousel-content h2 {
+        font-size: 1.25rem;
+    }
+
+    .carousel-content p {
+        font-size: var(--texto-pequeno);
+    }
+
+    .lineas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bonos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .perfil-container {
+        grid-template-columns: 1fr;
+    }
+
+    .dialog {
+        width: 90%;
+        max-width: 350px;
+    }
+
+    .hero-banner {
+        min-height: 200px;
+    }
+
+    .hero-banner h2 {
+        font-size: var(--titulo-movil);
+    }
+
+    .mapa-leyenda {
+        padding: 12px;
+    }
+
+    .leyenda-items {
+        grid-template-columns: 1fr;
+    }
+
+    .contacto-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Móviles pequeños */
+@media screen and (max-width: 480px) {
+    .header {
+        padding: 8px;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .site-title {
+        font-size: 1rem;
+    }
+
+    .navbar {
+        top: 66px;
+        min-height: 45px;
+    }
+
+    .nav-button {
+        font-size: 0.7rem;
+        padding: 6px 8px;
+        min-width: 80px;
+    }
+
+    .carousel-button {
+        width: 35px;
+        height: 35px;
+    }
+
+    .carousel-content h2 {
+        font-size: 1.1rem;
+    }
+
+    .faq-item h3 {
+        font-size: 1rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        font-size: var(--texto-pequeno);
+        padding: 10px 16px;
+    }
+}
+
+/* ========================================================= */
+/*                ANIMACIONES Y EFECTOS                      */
+/* ========================================================= */
+
+/* Animación de entrada de páginas */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page.active {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Efecto de pulso para botones importantes */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(108, 171, 239, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(108, 171, 239, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(108, 171, 239, 0);
+    }
+}
+
+.btn-primary:hover {
+    animation: pulse 1.5s infinite;
+}
+
+/* Skeleton loading para contenido dinámico */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 25%,
+        #e0e0e0 50%,
+        #f0f0f0 75%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+    border-radius: var(--border-radius);
+}
+
+/* Efecto de brillo en hover para tarjetas */
+.linea-card::before,
+.bono-card::before,
+.quick-access-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.linea-card:hover::before,
+.bono-card:hover::before,
+.quick-access-card:hover::before {
+    left: 100%;
+}
+
+.linea-card,
+.bono-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Indicador de carga */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--color-principal);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Efecto de escalado suave en imágenes */
+.info-image {
+    transition: transform 0.3s ease;
+}
+
+.info-image:hover {
+    transform: scale(1.05);
+}
+
+/* Transición suave para inputs con focus */
+.form-input:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 3px rgba(108, 171, 239, 0.1);
+}
+
+/* Animación para notificaciones toast */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutToRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.toast {
+    animation: slideInFromRight 0.3s ease-out;
+}
+
+.toast.removing {
+    animation: slideOutToRight 0.3s ease-in;
+}
+
+/* Efecto bounce para badges */
+.badge {
+    transition: transform 0.2s ease;
+}
+
+.badge:hover {
+    transform: scale(1.1);
+}
+
+/* Mejora de accesibilidad: focus visible */
+button:focus-visible,
+a:focus-visible,
+.nav-button:focus-visible {
+    outline: 3px solid var(--color-principal);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ========================================================= */
+/*          ANIMACIONES ADICIONALES DE INTERACTIVIDAD       */
+/* ========================================================= */
+
+/* Efecto de deslizamiento hacia arriba para elementos */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación de escalado suave */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Efecto de rebote suave */
+@keyframes softBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Animación de rotación suave para iconos */
+@keyframes gentleRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Efecto de brillo pulsante */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.8);
+    }
+}
+
+/* Mejorar hover en inputs */
+input[type="text"]:hover:not(:focus),
+input[type="email"]:hover:not(:focus),
+input[type="password"]:hover:not(:focus),
+input[type="tel"]:hover:not(:focus),
+textarea:hover:not(:focus) {
+    border-color: #bbb;
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+}
+
+/* Efecto ripple en botones */
+.btn-primary,
+.btn-secondary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after,
+.btn-secondary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:active::after,
+.btn-secondary:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Animación de carga suave */
+@keyframes smoothLoad {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Aplicar animación a elementos dinámicos */
+.linea-card,
+.bono-card,
+.aviso-card {
+    animation: smoothLoad 0.4s ease-out;
+}
+
+/* Transiciones suaves para todos los elementos interactivos */
+a, button, input, select, textarea {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efecto hover mejorado para enlaces */
+a:hover {
+    transform: translateX(2px);
+}
+
+/* Sombra dinámica en tarjetas */
+.linea-card:hover,
+.bono-card:hover,
+.quick-access-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
 }

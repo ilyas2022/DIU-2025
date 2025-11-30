@@ -26,8 +26,26 @@ function showPage(pageId) {
 
 // Función para actualizar el estado activo de la navegación
 function updateNavigation(activePageId) {
-    // Esta función se puede expandir para resaltar el botón activo
-    // según la página actual
+    const navbars = document.querySelectorAll('.navbar');
+    navbars.forEach(navbar => {
+        const navButtons = navbar.querySelectorAll('.nav-button');
+        navButtons.forEach(button => {
+            button.classList.remove('active');
+            const buttonPageId = button.getAttribute('onclick')?.match(/showPage\('(.+?)'\)/)?.[1];
+            if (buttonPageId === activePageId) {
+                button.classList.add('active');
+            }
+        });
+    });
+
+    // Si estamos en una página de autenticación, no resaltar ningún botón
+    if (['login', 'registro', 'recuperar-contrasena'].includes(activePageId)) {
+        const navbars = document.querySelectorAll('.navbar');
+        navbars.forEach(navbar => {
+            const navButtons = navbar.querySelectorAll('.nav-button');
+            navButtons.forEach(button => button.classList.remove('active'));
+        });
+    }
 }
 
 // Inicialización cuando el DOM esté listo

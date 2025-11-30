@@ -1,2 +1,29 @@
-.claude
-.gitignore
+# Claude Code
+.claude/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Dependencias
+node_modules/
+.npm/
+.yarn/
+
+# Archivos temporales
+*.tmp
+*.temp
+.cache/

@@ -60,20 +60,104 @@
     <!-- ============================================ -->
     <template id="navbar-template">
         <nav class="navbar">
-            <button class="nav-button" onclick="showPage('info-alsa')">Info ALSA</button>
-            <button class="nav-button" onclick="showPage('lineas')">Líneas y Paradas</button>
-            <button class="nav-button" onclick="showPage('bonos')">Bonos</button>
-            <button class="nav-button" onclick="showPage('avisos')">Avisos y Noticias</button>
-            <button class="nav-button" onclick="showPage('recarga')">Recargas</button>
-            <button class="nav-button" onclick="showPage('mensajes')">Mensajes</button>
-            <button class="nav-button" onclick="showPage('mapa')">Mapa</button>
-            <button class="nav-button" onclick="showPage('planificador')">Planificador de viajes</button>
-            <button class="nav-button" onclick="showPage('favoritos')">Favoritos</button>
-            <button class="nav-button user-button" onclick="showPage('perfil')">
-                <svg class="user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
+            <button class="nav-button" onclick="showPage('info-alsa')">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
                 </svg>
+                Info ALSA
+            </button>
+            <button class="nav-button" onclick="showPage('lineas')">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <!-- IC01: Autobús/Líneas activas -->
+                    <rect x="6" y="4" width="12" height="2" rx="1"/>
+                    <rect x="5" y="7" width="14" height="11" rx="2"/>
+                    <rect x="7" y="9" width="4" height="3" rx="0.5"/>
+                    <rect x="13" y="9" width="4" height="3" rx="0.5"/>
+                    <circle cx="8" cy="20" r="1.5"/>
+                    <circle cx="16" cy="20" r="1.5"/>
+                </svg>
+                Líneas y Paradas
+            </button>
+            <button class="nav-button" onclick="showPage('bonos')">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <!-- IC08: Bonos/Tarjetas -->
+                    <rect x="3" y="6" width="18" height="12" rx="2"/>
+                    <rect x="3" y="9" width="18" height="2" fill="white" opacity="0.3"/>
+                    <circle cx="6" cy="14" r="1" fill="white"/>
+                </svg>
+                Bonos
+            </button>
+            <button class="nav-button" onclick="showPage('avisos')">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <!-- IC05: Avisos/Alertas con reloj -->
+                    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M19 4 L22 4 L22 10" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Avisos
+            </button>
+            <button class="nav-button" onclick="showPage('recarga')">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <!-- IC08: Bonos/Tarjetas (mismo que bonos, para recargas) -->
+                    <rect x="3" y="6" width="18" height="12" rx="2"/>
+                    <rect x="3" y="9" width="18" height="2" fill="white" opacity="0.3"/>
+                    <circle cx="6" cy="14" r="1" fill="white"/>
+                    <text x="15" y="15" font-size="8" fill="white" font-weight="bold">+</text>
+                </svg>
+                Recargas
+            </button>
+            <button class="nav-button" onclick="showPage('mensajes')">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Mensajes
+            </button>
+            <button class="nav-button" onclick="showPage('mapa')">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <!-- IC03: Mapa -->
+                    <path d="M3 8 L3 18 L9 20 L15 18 L21 20 L21 10 L15 8 L9 10 L3 8 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M9 10 L9 20" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M15 8 L15 18" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="12" cy="6" r="3" fill="currentColor"/>
+                    <path d="M12 3 L12 6" stroke="white" stroke-width="1"/>
+                </svg>
+                Mapa
+            </button>
+            <button class="nav-button" onclick="showPage('planificador')">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <!-- IC04: Tiempo/ETA -->
+                    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="18" cy="6" r="1.5"/>
+                    <circle cx="20" cy="9" r="1"/>
+                    <circle cx="21" cy="12" r="0.8"/>
+                </svg>
+                Planificador
+            </button>
+            <button class="nav-button" onclick="showPage('favoritos')">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <!-- IC06: Favoritos/Estrella -->
+                    <path d="M12 2 L15 8.5 L22 9.5 L17 14.5 L18.5 21.5 L12 18 L5.5 21.5 L7 14.5 L2 9.5 L9 8.5 Z"/>
+                </svg>
+                Favoritos
+            </button>
+            <button class="nav-button" onclick="showPage('ayuda')">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                Ayuda
+            </button>
+            <button class="nav-button user-button" onclick="showPage('perfil')">
+                <svg class="user-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <!-- IC07: Perfil/Usuario -->
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M5 20 C5 16 8 14 12 14 C16 14 19 16 19 20 L19 21 L5 21 Z"/>
+                </svg>
+                Perfil
             </button>
         </nav>
     </template>
@@ -103,19 +187,19 @@
                 </button>
 
                 <div class="carousel">
-                    <div class="carousel-slide active">
+                    <div class="carousel-slide active" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=1200&h=400&fit=crop') center/cover;">
                         <div class="carousel-content">
                             <h2>Bienvenido a SIT-Almería</h2>
                             <p>Tu sistema inteligente de transporte urbano</p>
                         </div>
                     </div>
-                    <div class="carousel-slide">
+                    <div class="carousel-slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1200&h=400&fit=crop') center/cover;">
                         <div class="carousel-content">
                             <h2>Consulta horarios en tiempo real</h2>
                             <p>Información actualizada de todas las líneas</p>
                         </div>
                     </div>
-                    <div class="carousel-slide">
+                    <div class="carousel-slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1200&h=400&fit=crop') center/cover;">
                         <div class="carousel-content">
                             <h2>Planifica tu viaje</h2>
                             <p>Encuentra la mejor ruta para tu destino</p>
@@ -134,18 +218,48 @@
                 <h3>Accesos rápidos</h3>
                 <div class="quick-access-grid">
                     <div class="quick-access-card" onclick="showPage('planificador')">
+                        <svg class="quick-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <!-- IC04: Tiempo/ETA -->
+                            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="18" cy="6" r="1.5"/>
+                            <circle cx="20" cy="9" r="1"/>
+                            <circle cx="21" cy="12" r="0.8"/>
+                        </svg>
                         <h4>Planificar viaje</h4>
                         <p>Calcula tu ruta</p>
                     </div>
                     <div class="quick-access-card" onclick="showPage('lineas')">
+                        <svg class="quick-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <!-- IC01: Autobús/Líneas activas -->
+                            <rect x="6" y="4" width="12" height="2" rx="1"/>
+                            <rect x="5" y="7" width="14" height="11" rx="2"/>
+                            <rect x="7" y="9" width="4" height="3" rx="0.5"/>
+                            <rect x="13" y="9" width="4" height="3" rx="0.5"/>
+                            <circle cx="8" cy="20" r="1.5"/>
+                            <circle cx="16" cy="20" r="1.5"/>
+                        </svg>
                         <h4>Consultar líneas</h4>
                         <p>Horarios y paradas</p>
                     </div>
                     <div class="quick-access-card" onclick="showPage('bonos')">
+                        <svg class="quick-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <!-- IC08: Bonos/Tarjetas -->
+                            <rect x="3" y="6" width="18" height="12" rx="2"/>
+                            <rect x="3" y="9" width="18" height="2" fill="white" opacity="0.3"/>
+                            <circle cx="6" cy="14" r="1" fill="white"/>
+                        </svg>
                         <h4>Ver bonos</h4>
                         <p>Tipos y precios</p>
                     </div>
                     <div class="quick-access-card" onclick="showPage('recarga')">
+                        <svg class="quick-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <!-- IC08: Bonos/Tarjetas con signo + -->
+                            <rect x="3" y="6" width="18" height="12" rx="2"/>
+                            <rect x="3" y="9" width="18" height="2" fill="white" opacity="0.3"/>
+                            <circle cx="6" cy="14" r="1" fill="white"/>
+                            <text x="14" y="16" font-size="8" fill="white" font-weight="bold">+</text>
+                        </svg>
                         <h4>Recargar tarjeta</h4>
                         <p>Online y seguro</p>
                     </div>
@@ -165,15 +279,30 @@
 
         <main class="page-content">
             <div class="page-title">
-                <h2>Líneas y Paradas</h2>
+                <div style="display: flex; align-items: center; gap: 16px; justify-content: center;">
+                    <svg class="page-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 48px; height: 48px; color: var(--color-principal);">
+                        <!-- IC01: Autobús/Líneas activas -->
+                        <rect x="6" y="4" width="12" height="2" rx="1"/>
+                        <rect x="5" y="7" width="14" height="11" rx="2"/>
+                        <rect x="7" y="9" width="4" height="3" rx="0.5"/>
+                        <rect x="13" y="9" width="4" height="3" rx="0.5"/>
+                        <circle cx="8" cy="20" r="1.5"/>
+                        <circle cx="16" cy="20" r="1.5"/>
+                    </svg>
+                    <h2>Líneas y Paradas</h2>
+                </div>
                 <p>Consulta todas las líneas del servicio</p>
             </div>
 
-            <div class="search-container">
-                <input type="text" id="lineas-search" class="search-input" placeholder="Buscar línea por nombre o número...">
+            <div class="search-container" style="margin: 30px 0; position: relative;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: #999;">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <input type="text" id="lineas-search" class="search-input" placeholder="Buscar línea por nombre o número..." style="width: 100%; padding: 15px 15px 15px 45px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 16px; transition: all 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 4px 12px rgba(102, 126, 234, 0.2)'" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.08)'">
             </div>
 
-            <div class="lineas-grid" id="lineas-list">
+            <div class="lineas-grid" id="lineas-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
                 <!-- Las líneas se cargarán dinámicamente desde data.js -->
             </div>
         </main>
@@ -214,12 +343,20 @@
         <div class="page-navbar"></div>
 
         <main class="page-content">
-            <div class="page-title">
-                <h2>Bonos y Tarifas</h2>
-                <p>Consulta los bonos disponibles</p>
+            <div class="page-title" style="text-align: center; margin-bottom: 40px;">
+                <div style="display: flex; align-items: center; gap: 16px; justify-content: center; margin-bottom: 10px;">
+                    <svg class="page-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 48px; height: 48px; color: var(--color-principal);">
+                        <!-- IC08: Bonos/Tarjetas -->
+                        <rect x="3" y="6" width="18" height="12" rx="2"/>
+                        <rect x="3" y="9" width="18" height="2" fill="white" opacity="0.3"/>
+                        <circle cx="6" cy="14" r="1" fill="white"/>
+                    </svg>
+                    <h2>Bonos y Tarifas</h2>
+                </div>
+                <p style="color: #666; font-size: 16px;">Elige el bono que mejor se adapte a tus necesidades</p>
             </div>
 
-            <div class="bonos-grid" id="bonos-list">
+            <div class="bonos-grid" id="bonos-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 30px;">
                 <!-- Los bonos se cargarán dinámicamente -->
             </div>
         </main>
@@ -235,12 +372,18 @@
         <div class="page-navbar"></div>
 
         <main class="page-content">
-            <div class="page-title">
-                <h2>Avisos y Noticias</h2>
-                <p>Últimas novedades e incidencias del servicio</p>
+            <div class="page-title" style="text-align: center; margin-bottom: 40px;">
+                <div style="display: flex; align-items: center; gap: 16px; justify-content: center; margin-bottom: 10px;">
+                    <svg class="page-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 48px; height: 48px; color: var(--color-principal);">
+                        <!-- IC05: Avisos/Alerta -->
+                        <path d="M12 2L1 21h22L12 2zm0 4l8.5 15h-17L12 6zm1 9h-2v-4h2v4zm0 3h-2v-2h2v2z"/>
+                    </svg>
+                    <h2>Avisos y Noticias</h2>
+                </div>
+                <p style="color: #666; font-size: 16px;">Mantente informado sobre incidencias y novedades del servicio</p>
             </div>
 
-            <div class="avisos-list" id="avisos-list">
+            <div class="avisos-list" id="avisos-list" style="display: flex; flex-direction: column; gap: 20px;">
                 <!-- Los avisos se cargarán dinámicamente -->
             </div>
         </main>
@@ -257,37 +400,65 @@
 
         <main class="page-content">
             <div class="page-title">
-                <h2>Mapa de Líneas</h2>
+                <div style="display: flex; align-items: center; gap: 16px; justify-content: center;">
+                    <svg class="page-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 48px; height: 48px; color: var(--color-principal);">
+                        <!-- IC03: Mapa -->
+                        <path d="M3 8 L3 18 L9 20 L15 18 L21 20 L21 10 L15 8 L9 10 L3 8 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M9 10 L9 20" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M15 8 L15 18" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="12" cy="6" r="3" fill="currentColor"/>
+                        <path d="M12 3 L12 6" stroke="white" stroke-width="1"/>
+                    </svg>
+                    <h2>Mapa de Líneas</h2>
+                </div>
                 <p>Visualiza todas las rutas del servicio</p>
             </div>
 
             <div class="mapa-container">
-                <div class="mapa-placeholder">
-                    <p>Mapa completo de líneas y paradas</p>
-                    <small>Última actualización: 15/11/2025</small>
+                <!-- Mapa interactivo -->
+                <div id="map-interactive" style="width: 100%; height: 500px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></div>
+                <div style="text-align: center; padding: 10px;">
+                    <small>Mapa interactivo de Almería - Última actualización: 29/11/2025</small>
+                </div>
+            </div>
+
+            <div class="mapa-info-section">
+                <h3>Información del mapa</h3>
+                <div class="info-box" style="margin-top: 16px;">
+                    <p><strong>Mapa interactivo de líneas de autobús</strong></p>
+                    <p>Usa el ratón para moverte por el mapa. Haz zoom con la rueda o los botones +/-. Las líneas de colores representan las diferentes rutas de autobús.</p>
                 </div>
             </div>
 
             <div class="mapa-leyenda">
-                <h3>Leyenda</h3>
+                <h3>Leyenda de Líneas</h3>
                 <div class="leyenda-items">
                     <div class="leyenda-item">
                         <span class="color-box" style="background: #FF6B6B"></span>
-                        <span>Línea 1</span>
+                        <span>Línea 1 - Centro</span>
                     </div>
                     <div class="leyenda-item">
                         <span class="color-box" style="background: #4ECDC4"></span>
-                        <span>Línea 2</span>
+                        <span>Línea 2 - Universidad</span>
                     </div>
                     <div class="leyenda-item">
                         <span class="color-box" style="background: #45B7D1"></span>
-                        <span>Línea 3</span>
+                        <span>Línea 3 - Hospital</span>
                     </div>
                     <div class="leyenda-item">
                         <span class="color-box" style="background: #FFA07A"></span>
-                        <span>Línea 4</span>
+                        <span>Línea 4 - Estación</span>
+                    </div>
+                    <div class="leyenda-item">
+                        <span class="color-box" style="background: #95E1D3"></span>
+                        <span>Línea 5 - Playa</span>
                     </div>
                 </div>
+            </div>
+
+            <div class="mapa-actions" style="margin-top: 20px; text-align: center;">
+                <button class="btn-secondary" onclick="showPage('lineas')">Ver detalles de líneas</button>
+                <button class="btn-secondary" onclick="showPage('planificador')">Planificar viaje</button>
             </div>
         </main>
 
@@ -341,7 +512,13 @@
 
         <main class="page-content">
             <div class="page-title">
-                <h2>Mis Favoritos</h2>
+                <div style="display: flex; align-items: center; gap: 16px; justify-content: center;">
+                    <svg class="page-icon" viewBox="0 0 24 24" fill="var(--color-acento)" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px;">
+                        <!-- IC06: Favoritos/Estrella -->
+                        <path d="M12 2 L15 8.5 L22 9.5 L17 14.5 L18.5 21.5 L12 18 L5.5 21.5 L7 14.5 L2 9.5 L9 8.5 Z"/>
+                    </svg>
+                    <h2>Mis Favoritos</h2>
+                </div>
                 <p>Paradas y líneas guardadas</p>
             </div>
 
@@ -362,7 +539,14 @@
 
         <main class="page-content">
             <div class="page-title">
-                <h2>Mi Perfil</h2>
+                <div style="display: flex; align-items: center; gap: 16px; justify-content: center;">
+                    <svg class="page-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 48px; height: 48px; color: var(--color-principal);">
+                        <!-- IC07: Perfil/Usuario -->
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M5 20 C5 16 8 14 12 14 C16 14 19 16 19 20 L19 21 L5 21 Z"/>
+                    </svg>
+                    <h2>Mi Perfil</h2>
+                </div>
                 <p>Información personal y saldo</p>
             </div>
 
@@ -387,7 +571,7 @@
                             <span class="value" id="perfil-tarjeta">TC98765432</span>
                         </div>
                     </div>
-                    <button class="btn-secondary">Editar perfil</button>
+                    <button class="btn-secondary" onclick="editarPerfil()">Editar perfil</button>
                 </div>
 
                 <div class="perfil-card">
@@ -406,9 +590,11 @@
                     </div>
                 </div>
 
-                <div class="perfil-actions">
+                <div class="perfil-actions" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px;">
                     <button class="btn-secondary" onclick="showPage('recarga')">Recargar tarjeta</button>
-                    <button class="btn-secondary" onclick="showPage('inicio')">Cerrar sesión</button>
+                    <button class="btn-secondary" onclick="cambiarContrasena()">Cambiar contraseña</button>
+                    <button class="btn-secondary" onclick="showPage('recuperar-contrasena')">He olvidado mi contraseña</button>
+                    <button class="btn-secondary" onclick="cerrarSesion()">Cerrar sesión</button>
                 </div>
             </div>
         </main>
@@ -492,6 +678,176 @@
     </section>
 
     <!-- ============================================ -->
+    <!--              PÁGINA: LOGIN                   -->
+    <!-- ============================================ -->
+    <section id="login" class="page">
+        <div class="page-header"></div>
+        <main class="page-content" style="max-width: 500px; margin: 0 auto;">
+            <div class="page-title" style="text-align: center; margin-bottom: 30px;">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width: 80px; height: 80px; color: var(--color-principal); margin: 0 auto 16px;">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M5 20 C5 16 8 14 12 14 C16 14 19 16 19 20 L19 21 L5 21 Z"/>
+                </svg>
+                <h2>Bienvenido de nuevo</h2>
+                <p>Inicia sesión para acceder a tu cuenta</p>
+            </div>
+            <div class="login-form" style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <div class="form-group">
+                    <label style="font-weight: 600; margin-bottom: 8px; display: block;">Correo Electrónico</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="ejemplo@correo.com" style="width: 100%;">
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: 600; margin-bottom: 8px; display: block;">Contraseña</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="••••••••" style="width: 100%;">
+                </div>
+                <button class="btn-primary" onclick="iniciarSesion()" style="width: 100%; padding: 14px; font-size: 16px; margin-top: 10px;">Iniciar Sesión</button>
+                <div class="login-links" style="margin-top: 20px; text-align: center; display: flex; flex-direction: column; gap: 10px;">
+                    <a href="#" onclick="showPage('recuperar-contrasena')" style="color: var(--color-principal); text-decoration: none; font-weight: 500;">¿Olvidaste tu contraseña?</a>
+                    <div style="border-top: 1px solid #e0e0e0; padding-top: 20px; margin-top: 10px;">
+                        <p style="color: #666; margin-bottom: 10px;">¿No tienes una cuenta?</p>
+                        <a href="#" onclick="showPage('registro')" style="color: var(--color-principal); text-decoration: none; font-weight: 600; font-size: 16px;">Crear cuenta nueva</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--            PÁGINA: REGISTRO                  -->
+    <!-- ============================================ -->
+    <section id="registro" class="page">
+        <div class="page-header"></div>
+        <main class="page-content" style="max-width: 550px; margin: 0 auto;">
+            <div class="page-title" style="text-align: center; margin-bottom: 30px;">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width: 70px; height: 70px; margin: 0 auto 15px; color: var(--color-primary);">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                <h2 style="margin: 0 0 8px 0; font-size: 28px;">Crear Cuenta</h2>
+                <p style="color: #666; margin: 0;">Únete a SIT-Almería</p>
+            </div>
+            <div class="registro-form" style="background: white; padding: 35px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Nombre Completo</label>
+                    <input type="text" id="registro-nombre" class="form-input" placeholder="Ej: María García López" style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; transition: all 0.3s;">
+                </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Correo Electrónico</label>
+                    <input type="email" id="registro-email" class="form-input" placeholder="tu@email.com" style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; transition: all 0.3s;">
+                </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Contraseña</label>
+                    <input type="password" id="registro-password" class="form-input" placeholder="Mínimo 8 caracteres" style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; transition: all 0.3s;">
+                </div>
+                <div class="form-group" style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Confirmar Contraseña</label>
+                    <input type="password" id="registro-confirm-password" class="form-input" placeholder="Repite la contraseña" style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; transition: all 0.3s;">
+                </div>
+                <button class="btn-primary" onclick="crearCuenta()" style="width: 100%; padding: 14px; font-size: 16px; font-weight: 600; border-radius: 8px; margin-bottom: 20px; cursor: pointer; transition: all 0.3s;">Crear Cuenta</button>
+                <div class="login-links" style="text-align: center; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                    <span style="color: #666;">¿Ya tienes cuenta? <a href="#" onclick="showPage('login')" style="color: var(--color-primary); font-weight: 500; text-decoration: none;">Inicia sesión</a></span>
+                </div>
+            </div>
+        </main>
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--     PÁGINA: RECUPERAR CONTRASEÑA             -->
+    <!-- ============================================ -->
+    <section id="recuperar-contrasena" class="page">
+        <div class="page-header"></div>
+        <main class="page-content" style="max-width: 500px; margin: 0 auto;">
+            <div class="page-title" style="text-align: center; margin-bottom: 30px;">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width: 70px; height: 70px; margin: 0 auto 15px; color: var(--color-primary);">
+                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+                </svg>
+                <h2 style="margin: 0 0 8px 0; font-size: 28px;">Recuperar Contraseña</h2>
+                <p style="color: #666; margin: 0;">Te enviaremos instrucciones por correo</p>
+            </div>
+            <div class="recuperar-form" style="background: white; padding: 35px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <div class="form-group" style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Correo Electrónico</label>
+                    <input type="email" id="recuperar-email" class="form-input" placeholder="tu@email.com" style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; transition: all 0.3s;">
+                </div>
+                <button class="btn-primary" onclick="recuperarContrasena()" style="width: 100%; padding: 14px; font-size: 16px; font-weight: 600; border-radius: 8px; margin-bottom: 20px; cursor: pointer; transition: all 0.3s;">Enviar Instrucciones</button>
+                <div class="login-links" style="text-align: center; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                    <a href="#" onclick="showPage('login')" style="color: var(--color-primary); font-weight: 500; text-decoration: none;">← Volver a inicio de sesión</a>
+                </div>
+            </div>
+        </main>
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!--            PÁGINA: AYUDA / FAQ               -->
+    <!-- ============================================ -->
+    <section id="ayuda" class="page">
+        <div class="page-header"></div>
+        <div class="page-navbar"></div>
+
+        <main class="page-content">
+            <div class="page-title">
+                <h2>Ayuda - Preguntas Frecuentes</h2>
+                <p>Encuentra respuestas a las dudas más comunes</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3>¿Cómo puedo planificar un viaje dentro de la aplicación?</h3>
+                    <p>Puedes acceder al planificador desde la cabecera ("Planificador"). Solo debes introducir un origen y un destino. El sistema validará ambos datos y te mostrará todas las rutas disponibles, ordenadas por duración.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>¿Qué puedo hacer si no encuentro una parada o línea?</h3>
+                    <p>Verifica que estés escribiendo el nombre correcto o usa el buscador por palabras clave. Si el sistema no encuentra coincidencias, te permitirá introducir los datos de nuevo.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>¿Cómo guardo una parada como favorita?</h3>
+                    <p>En la pantalla de detalles (línea o parada) encontrarás el icono de <strong>estrella</strong>. Al pulsarlo, la parada se añadirá automáticamente a la sección <strong>Favoritos</strong>.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>¿Qué significa ETA?</h3>
+                    <p>ETA significa <strong>"Tiempo Estimado de Llegada"</strong>. Indica cuántos minutos faltan para que lleguen los próximos autobuses a una parada.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>El mapa no carga, ¿qué debo hacer?</h3>
+                    <p>Puede deberse a un problema temporal del servicio. Intenta recargar la página o verifica tu conexión a internet.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>¿Cómo puedo recargar mi tarjeta?</h3>
+                    <p>Accede a la opción <strong>Recargas</strong>.</p>
+                    <ul>
+                        <li>Si tienes tarjeta asociada, introduce el importe y método de pago.</li>
+                        <li>Si no tienes tarjeta asociada, el sistema te pedirá vincular una antes de continuar.</li>
+                    </ul>
+                </div>
+
+                <div class="faq-item">
+                    <h3>El pago me ha fallado, ¿he perdido el dinero?</h3>
+                    <p>No. Cuando un pago falla, el sistema no registra ninguna recarga y tu saldo permanece igual. Puedes intentarlo de nuevo con otro método de pago.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>¿Cómo puedo recuperar mi contraseña?</h3>
+                    <p>En la página de inicio de sesión, haz clic en "¿Olvidaste tu contraseña?". Introduce tu correo electrónico y recibirás instrucciones para recuperarla.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>¿Cómo creo una cuenta?</h3>
+                    <p>En la página de inicio de sesión, haz clic en "Crear cuenta nueva" y completa el formulario de registro con tus datos personales.</p>
+                </div>
+            </div>
+        </main>
+
+        <div class="page-footer"></div>
+    </section>
+
+    <!-- ============================================ -->
     <!--            PÁGINA: INFO ALSA                 -->
     <!-- ============================================ -->
     <section id="info-alsa" class="page">
@@ -500,25 +856,30 @@
 
         <main class="info-alsa-content">
             <section class="section-conocenos">
-                <div class="hero-banner">
-                    <h2>CONÓCENOS</h2>
+                <div class="hero-banner" style="background: linear-gradient(135deg, #6CABEF 0%, #60B3EB 100%); padding: 60px 20px; text-align: center; color: white; margin-bottom: 40px; border-radius: 8px;">
+                    <h2 style="font-size: 2.5rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">CONÓCENOS</h2>
+                    <p style="font-size: 1.1rem; margin-top: 10px; opacity: 0.95;">Más de 100 años conectando Almería</p>
                 </div>
             </section>
 
-            <section class="section-historia">
+            <section class="section-historia" style="margin-bottom: 50px;">
                 <div class="two-column-layout">
-                    <div class="column image-column">
-                        <div class="image-placeholder">
-                            <span>Imagen</span>
-                        </div>
+                    <div class="column image-column" style="animation: slideUp 0.6s ease-out;">
+                        <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=400&h=300&fit=crop"
+                             alt="Autobús histórico de ALSA"
+                             class="info-image"
+                             style="border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); transition: transform 0.3s;"
+                             onmouseover="this.style.transform='scale(1.05)'"
+                             onmouseout="this.style.transform='scale(1)'"
+                             onerror="this.src='https://placehold.co/400x300/6CABEF/FFFFFF/png?text=Autobús+Histórico'">
                     </div>
-                    <div class="column content-column">
-                        <div class="content-card">
-                            <h3>HISTORIA DE ALSA</h3>
-                            <div class="text-content">
-                                <p>ALSA es una empresa líder en transporte de viajeros en España, con más de 100 años de experiencia en el sector.</p>
-                                <p>Fundada en 1923, ha evolucionado constantemente para ofrecer servicios de calidad adaptados a las necesidades de movilidad de los ciudadanos.</p>
-                                <p>En Almería, ALSA gestiona el servicio de autobuses urbanos bajo la marca SURBUS, conectando toda la ciudad con una flota moderna y sostenible.</p>
+                    <div class="column content-column" style="animation: slideUp 0.6s ease-out 0.2s backwards;">
+                        <div class="content-card" style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                            <h3 style="color: #6CABEF; margin-bottom: 20px; font-size: 1.8rem;">HISTORIA DE ALSA</h3>
+                            <div class="text-content" style="line-height: 1.8;">
+                                <p>ALSA es una empresa líder en transporte de viajeros en España, con más de <strong>100 años de experiencia</strong> en el sector.</p>
+                                <p>Fundada en <strong>1923</strong>, ha evolucionado constantemente para ofrecer servicios de calidad adaptados a las necesidades de movilidad de los ciudadanos.</p>
+                                <p>En Almería, ALSA gestiona el servicio de autobuses urbanos bajo la marca <strong>SURBUS</strong>, conectando toda la ciudad con una flota moderna y sostenible.</p>
                                 <p>Nuestro compromiso es facilitar el transporte público eficiente, accesible y respetuoso con el medio ambiente.</p>
                             </div>
                         </div>
@@ -526,69 +887,77 @@
                 </div>
             </section>
 
-            <section class="section-servicios">
+            <section class="section-servicios" style="margin-bottom: 50px;">
                 <div class="two-column-layout reverse">
-                    <div class="column content-column">
-                        <div class="content-card">
-                            <h3>SERVICIOS Y OBJETIVOS</h3>
-                            <div class="text-content">
-                                <p><strong>Nuestros Servicios:</strong></p>
-                                <p>- 15 líneas de autobuses urbanos que conectan toda la ciudad</p>
-                                <p>- Flota de 53 vehículos modernos y accesibles</p>
-                                <p>- Sistema de información en tiempo real</p>
-                                <p>- Bonos y tarifas adaptadas a diferentes necesidades</p>
-                                <p><strong>Nuestros Objetivos:</strong></p>
-                                <p>- Promover la movilidad sostenible en Almería</p>
-                                <p>- Ofrecer un servicio puntual, seguro y de calidad</p>
-                                <p>- Facilitar el acceso al transporte público para todos los ciudadanos</p>
-                                <p>- Reducir el impacto ambiental mediante vehículos eco-eficientes</p>
+                    <div class="column content-column" style="animation: slideUp 0.6s ease-out 0.1s backwards;">
+                        <div class="content-card" style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                            <h3 style="color: #6CABEF; margin-bottom: 20px; font-size: 1.8rem;">SERVICIOS Y OBJETIVOS</h3>
+                            <div class="text-content" style="line-height: 1.8;">
+                                <p><strong style="color: #60B3EB; font-size: 1.1rem;">Nuestros Servicios:</strong></p>
+                                <ul style="margin-bottom: 25px;">
+                                    <li>15 líneas de autobuses urbanos que conectan toda la ciudad</li>
+                                    <li>Flota de 53 vehículos modernos y accesibles</li>
+                                    <li>Sistema de información en tiempo real</li>
+                                    <li>Bonos y tarifas adaptadas a diferentes necesidades</li>
+                                </ul>
+                                <p><strong style="color: #60B3EB; font-size: 1.1rem;">Nuestros Objetivos:</strong></p>
+                                <ul>
+                                    <li>Promover la movilidad sostenible en Almería</li>
+                                    <li>Ofrecer un servicio puntual, seguro y de calidad</li>
+                                    <li>Facilitar el acceso al transporte público para todos</li>
+                                    <li>Reducir el impacto ambiental con vehículos eco-eficientes</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="column image-column">
-                        <div class="image-placeholder">
-                            <span>Imagen</span>
-                        </div>
+                    <div class="column image-column" style="animation: slideUp 0.6s ease-out 0.3s backwards;">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop"
+                             alt="Flota moderna de autobuses"
+                             class="info-image"
+                             style="border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); transition: transform 0.3s;"
+                             onmouseover="this.style.transform='scale(1.05)'"
+                             onmouseout="this.style.transform='scale(1)'"
+                             onerror="this.src='https://placehold.co/400x300/60B3EB/FFFFFF/png?text=Flota+Moderna'">
                     </div>
                 </div>
             </section>
 
             <section class="section-contacto">
-                <div class="contacto-container">
-                    <h3>Contacto</h3>
-                    <p class="contacto-subtitle">Para más información:</p>
+                <div class="contacto-container" style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; animation: slideUp 0.6s ease-out 0.4s backwards;">
+                    <h3 style="color: #6CABEF; font-size: 1.8rem; margin-bottom: 10px;">Contacto</h3>
+                    <p class="contacto-subtitle" style="color: #666; margin-bottom: 30px;">Para más información:</p>
 
-                    <div class="contacto-list">
-                        <div class="contacto-item">
-                            <div class="contacto-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="contacto-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; margin-bottom: 30px;">
+                        <div class="contacto-item" style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px; background: #F2F2F2; border-radius: 10px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <div class="contacto-icon" style="background: #6CABEF; padding: 12px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
                                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                                 </svg>
                             </div>
-                            <span>950 123 456</span>
+                            <span style="font-weight: 500; color: #333;">950 123 456</span>
                         </div>
 
-                        <div class="contacto-item">
-                            <div class="contacto-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <div class="contacto-item" style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px; background: #F2F2F2; border-radius: 10px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <div class="contacto-icon" style="background: #6CABEF; padding: 12px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                                     <polyline points="22,6 12,13 2,6"/>
                                 </svg>
                             </div>
-                            <span>info@sit-almeria.es</span>
+                            <span style="font-weight: 500; color: #333;">info@sit-almeria.es</span>
                         </div>
 
-                        <div class="contacto-item">
-                            <div class="contacto-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <div class="contacto-item" style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px; background: #F2F2F2; border-radius: 10px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <div class="contacto-icon" style="background: #6CABEF; padding: 12px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
                                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                                 </svg>
                             </div>
-                            <span>@SITAlmeria</span>
+                            <span style="font-weight: 500; color: #333;">@SITAlmeria</span>
                         </div>
                     </div>
 
-                    <button class="btn-volver" onclick="showPage('inicio')">Volver</button>
+                    <button class="btn-volver" onclick="showPage('inicio')" style="background: #6CABEF; color: white; padding: 12px 40px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#60B3EB'; this.style.transform='scale(1.05)'" onmouseout="this.style.background='#6CABEF'; this.style.transform='scale(1)'">Volver al Inicio</button>
                 </div>
             </section>
         </main>
@@ -602,5 +971,341 @@
     <script src="js/carousel.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/app.js"></script>
+
+    <!-- Función Editar Perfil - Definida globalmente -->
+    <script>
+        // FUNCIÓN EDITAR PERFIL - GLOBAL
+        function editarPerfil() {
+            console.log('>>> Función editarPerfil llamada');
+
+            const nombreEl = document.getElementById('perfil-nombre');
+            const emailEl = document.getElementById('perfil-email');
+            const telefonoEl = document.getElementById('perfil-telefono');
+
+            if (!nombreEl || !emailEl || !telefonoEl) {
+                console.error('Error: No se encontraron los elementos del perfil');
+                alert('Error: No se pudieron cargar los datos del perfil. Por favor recarga la página.');
+                return;
+            }
+
+            const nombre = nombreEl.textContent;
+            const email = emailEl.textContent;
+            const telefono = telefonoEl.textContent;
+
+            console.log('Datos actuales del perfil:', {nombre, email, telefono});
+
+            // Crear diálogo de edición
+            const dialog = document.createElement('div');
+            dialog.className = 'dialog-overlay';
+            dialog.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 10000;';
+
+            dialog.innerHTML = `
+                <div class="dialog" style="background: white; padding: 30px; border-radius: 8px; max-width: 500px; width: 90%;">
+                    <h3 style="margin-bottom: 20px; color: #333;">Editar Perfil</h3>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600;">Nombre completo</label>
+                        <input type="text" id="edit-nombre" class="form-input" value="${nombre}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600;">Correo electrónico</label>
+                        <input type="email" id="edit-email" class="form-input" value="${email}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600;">Teléfono</label>
+                        <input type="tel" id="edit-telefono" class="form-input" value="${telefono}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div class="dialog-actions" style="display: flex; gap: 10px; justify-content: flex-end;">
+                        <button class="btn-secondary" onclick="cerrarDialogoEdicion()" style="padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; background: #6c757d; color: white;">Cancelar</button>
+                        <button class="btn-primary" onclick="guardarCambiosPerfil()" style="padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; background: #6CABEF; color: white;">Guardar cambios</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(dialog);
+            console.log('>>> Diálogo de edición creado y mostrado');
+        }
+
+        function cerrarDialogoEdicion() {
+            const overlay = document.querySelector('.dialog-overlay');
+            if (overlay) {
+                overlay.remove();
+                console.log('Diálogo cerrado');
+            }
+        }
+
+        function guardarCambiosPerfil() {
+            console.log('>>> Guardando cambios del perfil...');
+
+            const nuevoNombre = document.getElementById('edit-nombre').value.trim();
+            const nuevoEmail = document.getElementById('edit-email').value.trim();
+            const nuevoTelefono = document.getElementById('edit-telefono').value.trim();
+
+            console.log('Nuevos valores:', {nuevoNombre, nuevoEmail, nuevoTelefono});
+
+            // Validaciones
+            if (!nuevoNombre || !nuevoEmail || !nuevoTelefono) {
+                alert('⚠️ Todos los campos son obligatorios');
+                return;
+            }
+
+            if (nuevoNombre.length < 3) {
+                alert('⚠️ El nombre debe tener al menos 3 caracteres');
+                return;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(nuevoEmail)) {
+                alert('⚠️ Introduce un correo electrónico válido');
+                return;
+            }
+
+            // Actualizar interfaz
+            document.getElementById('perfil-nombre').textContent = nuevoNombre;
+            document.getElementById('perfil-email').textContent = nuevoEmail;
+            document.getElementById('perfil-telefono').textContent = nuevoTelefono;
+
+            // Actualizar datos en memoria si existe
+            if (typeof sitData !== 'undefined' && sitData.usuario) {
+                sitData.usuario.nombre = nuevoNombre;
+                sitData.usuario.email = nuevoEmail;
+                sitData.usuario.telefono = nuevoTelefono;
+                console.log('Datos actualizados en sitData');
+            }
+
+            // Cerrar diálogo
+            cerrarDialogoEdicion();
+
+            // Mostrar confirmación
+            alert('✅ Perfil actualizado correctamente');
+            console.log('>>> Perfil guardado exitosamente');
+        }
+
+        // FUNCIÓN CAMBIAR CONTRASEÑA
+        function cambiarContrasena() {
+            console.log('>>> Función cambiarContrasena llamada');
+
+            // Crear diálogo de cambio de contraseña
+            const dialog = document.createElement('div');
+            dialog.className = 'dialog-overlay';
+            dialog.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 10000;';
+
+            dialog.innerHTML = `
+                <div class="dialog" style="background: white; padding: 30px; border-radius: 8px; max-width: 500px; width: 90%;">
+                    <h3 style="margin-bottom: 20px; color: #333;">Cambiar Contraseña</h3>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600;">Contraseña actual</label>
+                        <input type="password" id="current-password" class="form-input" placeholder="Introduce tu contraseña actual" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600;">Nueva contraseña</label>
+                        <input type="password" id="new-password" class="form-input" placeholder="Mínimo 8 caracteres" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600;">Confirmar nueva contraseña</label>
+                        <input type="password" id="confirm-password" class="form-input" placeholder="Repite la nueva contraseña" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div class="dialog-actions" style="display: flex; gap: 10px; justify-content: flex-end;">
+                        <button class="btn-secondary" onclick="cerrarDialogoContrasena()" style="padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; background: #6c757d; color: white;">Cancelar</button>
+                        <button class="btn-primary" onclick="guardarNuevaContrasena()" style="padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; background: #6CABEF; color: white;">Cambiar contraseña</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(dialog);
+            console.log('>>> Diálogo de cambio de contraseña mostrado');
+        }
+
+        function cerrarDialogoContrasena() {
+            const overlay = document.querySelector('.dialog-overlay');
+            if (overlay) {
+                overlay.remove();
+            }
+        }
+
+        function guardarNuevaContrasena() {
+            console.log('>>> Guardando nueva contraseña...');
+
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Validaciones
+            if (!currentPassword) {
+                alert('⚠️ Introduce tu contraseña actual');
+                return;
+            }
+
+            if (!newPassword) {
+                alert('⚠️ Introduce la nueva contraseña');
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                alert('⚠️ La nueva contraseña debe tener al menos 8 caracteres');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                alert('⚠️ Las contraseñas no coinciden');
+                return;
+            }
+
+            if (currentPassword === newPassword) {
+                alert('⚠️ La nueva contraseña debe ser diferente a la actual');
+                return;
+            }
+
+            // Cerrar diálogo
+            cerrarDialogoContrasena();
+
+            // Mostrar confirmación
+            alert('✅ Contraseña cambiada correctamente\n\nPor seguridad, se cerrará tu sesión.');
+
+            // Simular cierre de sesión
+            setTimeout(function() {
+                showPage('login');
+            }, 1000);
+
+            console.log('>>> Contraseña cambiada exitosamente');
+        }
+    </script>
+
+    <!-- Leaflet JS para el mapa - CARGA ASÍNCRONA -->
+    <script>
+        // Variable global para el mapa
+        let mapaInicializado = false;
+
+        // Cargar Leaflet solo cuando sea necesario
+        function cargarLeaflet() {
+            if (typeof L !== 'undefined') {
+                initializeMap();
+                return;
+            }
+
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+            document.head.appendChild(link);
+
+            const script = document.createElement('script');
+            script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+            script.onload = function() {
+                initializeMap();
+            };
+            document.body.appendChild(script);
+        }
+
+        function initializeMap() {
+            if (mapaInicializado) return;
+
+            const mapElement = document.getElementById('map-interactive');
+            if (!mapElement) return;
+
+            // MAPA SUPER OPTIMIZADO - Área muy reducida
+            const map = L.map('map-interactive', {
+                center: [36.8381, -2.4597],
+                zoom: 15, // Más zoom = área más pequeña
+                zoomControl: true,
+                attributionControl: false,
+                preferCanvas: true, // Renderizado más rápido
+                maxBounds: [[36.82, -2.48], [36.86, -2.44]], // Limitar área
+                maxBoundsViscosity: 1.0 // No permitir salir del área
+            });
+
+            // Tiles optimizados
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '',
+                maxZoom: 16,
+                minZoom: 14,
+                updateWhenIdle: true,
+                updateWhenZooming: false,
+                keepBuffer: 2
+            }).addTo(map);
+
+            // Colores de líneas
+            const lineColors = {
+                1: '#FF6B6B',
+                2: '#4ECDC4',
+                3: '#45B7D1',
+                4: '#FFA07A',
+                5: '#95E1D3'
+            };
+
+            // RUTAS REALISTAS - Múltiples puntos simulando carreteras
+            // Línea 1 - Centro (Ruta con curvas realistas)
+            L.polyline([
+                [36.8381, -2.4597],
+                [36.8385, -2.4590],
+                [36.8390, -2.4580],
+                [36.8395, -2.4570],
+                [36.8402, -2.4555],
+                [36.8408, -2.4545],
+                [36.8410, -2.4540]
+            ], {color: lineColors[1], weight: 5, opacity: 0.8, smoothFactor: 1}).addTo(map)
+                .bindPopup('<b>Línea 1 - Centro</b>');
+
+            // Línea 2 - Universidad (Ruta hacia el sur)
+            L.polyline([
+                [36.8381, -2.4597],
+                [36.8375, -2.4605],
+                [36.8368, -2.4615],
+                [36.8362, -2.4625],
+                [36.8356, -2.4638],
+                [36.8352, -2.4645],
+                [36.8350, -2.4650]
+            ], {color: lineColors[2], weight: 5, opacity: 0.8, smoothFactor: 1}).addTo(map)
+                .bindPopup('<b>Línea 2 - Universidad</b>');
+
+            // Línea 3 - Hospital (Ruta hacia el este con curva)
+            L.polyline([
+                [36.8381, -2.4597],
+                [36.8388, -2.4595],
+                [36.8395, -2.4593],
+                [36.8405, -2.4592],
+                [36.8412, -2.4591],
+                [36.8418, -2.4590],
+                [36.8420, -2.4590]
+            ], {color: lineColors[3], weight: 5, opacity: 0.8, smoothFactor: 1}).addTo(map)
+                .bindPopup('<b>Línea 3 - Hospital</b>');
+
+            // Línea 4 - Estación (Ruta diagonal suroeste)
+            L.polyline([
+                [36.8381, -2.4597],
+                [36.8372, -2.4608],
+                [36.8365, -2.4620],
+                [36.8358, -2.4632],
+                [36.8350, -2.4645],
+                [36.8345, -2.4653],
+                [36.8340, -2.4660]
+            ], {color: lineColors[4], weight: 5, opacity: 0.8, smoothFactor: 1}).addTo(map)
+                .bindPopup('<b>Línea 4 - Estación</b>');
+
+            // Línea 5 - Playa (Ruta hacia el noroeste)
+            L.polyline([
+                [36.8381, -2.4597],
+                [36.8375, -2.4585],
+                [36.8368, -2.4572],
+                [36.8362, -2.4560],
+                [36.8356, -2.4548],
+                [36.8352, -2.4542],
+                [36.8350, -2.4540]
+            ], {color: lineColors[5], weight: 5, opacity: 0.8, smoothFactor: 1}).addTo(map)
+                .bindPopup('<b>Línea 5 - Playa</b>');
+
+            // Marcador central simple
+            L.marker([36.8381, -2.4597]).addTo(map)
+                .bindPopup('<b>Centro</b>');
+
+            mapaInicializado = true;
+        }
+
+        // Cargar mapa solo cuando se navegue a la página
+        const originalShowPage = window.showPage;
+        window.showPage = function(pageId) {
+            originalShowPage(pageId);
+            if (pageId === 'mapa' && !mapaInicializado) {
+                setTimeout(cargarLeaflet, 50);
+            }
+        };
+    </script>
 </body>
 </html>
