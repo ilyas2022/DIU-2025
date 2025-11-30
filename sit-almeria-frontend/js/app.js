@@ -124,8 +124,15 @@ function mostrarDetalleLinea(lineaId) {
                     <div>
                         <div class="parada-nombre">${parada.nombre}</div>
                     </div>
-                    <div class="parada-eta">
-                        ${parada.eta} <span>min</span>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div class="parada-eta">
+                            ${parada.eta} <span>min</span>
+                        </div>
+                        <button class="btn-favorito" onclick="agregarParadaFavorita(${lineaId}, '${parada.nombre}')" title="Guardar en favoritos" style="background: #EBED7E; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; transition: all 0.3s;">
+                            <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: #4D4D4D;">
+                                <path d="M12 2 L15 8.5 L22 9.5 L17 14.5 L18.5 21.5 L12 18 L5.5 21.5 L7 14.5 L2 9.5 L9 8.5 Z"/>
+                            </svg>
+                        </button>
                     </div>
                 `;
                 paradasList.appendChild(paradaItem);
@@ -244,12 +251,30 @@ function cargarFavoritos() {
         const favoritoItem = document.createElement('div');
         favoritoItem.className = 'favorito-item';
 
+        // Determinar icono según tipo
+        const icono = favorito.tipo.toLowerCase() === 'línea' ?
+            `<svg viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px; color: #6CABEF;">
+                <rect x="6" y="4" width="12" height="2" rx="1"/>
+                <rect x="5" y="7" width="14" height="11" rx="2"/>
+                <rect x="7" y="9" width="4" height="3" rx="0.5"/>
+                <rect x="13" y="9" width="4" height="3" rx="0.5"/>
+                <circle cx="8" cy="20" r="1.5"/>
+                <circle cx="16" cy="20" r="1.5"/>
+            </svg>` :
+            `<svg viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px; color: #6CABEF;">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 2 C12 2, 12 2, 12 8 M12 16 C12 16, 12 22, 12 22 M2 12 C2 12, 8 12, 8 12 M16 12 C16 12, 22 12, 22 12"/>
+            </svg>`;
+
         favoritoItem.innerHTML = `
-            <div class="favorito-info">
-                <h4>${favorito.nombre}</h4>
-                <span class="favorito-tipo">${favorito.tipo}</span>
+            <div class="favorito-info" onclick="irAFavorito(${index})" style="cursor: pointer; display: flex; align-items: center; gap: 12px; flex: 1;">
+                ${icono}
+                <div>
+                    <h4 style="margin: 0 0 4px 0;">${favorito.nombre}</h4>
+                    <span class="favorito-tipo" style="background: #F2F2F2; padding: 4px 10px; border-radius: 12px; font-size: 12px; color: #4D4D4D;">${favorito.tipo}</span>
+                </div>
             </div>
-            <button class="btn-eliminar" onclick="eliminarFavorito(${index}, '${favorito.nombre}')">
+            <button class="btn-eliminar" onclick="eliminarFavorito(${index}, '${favorito.nombre}')" style="background: #E85858; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: all 0.3s;">
                 Eliminar
             </button>
         `;
@@ -258,7 +283,7 @@ function cargarFavoritos() {
     });
 }
 
-// U-061: Favorito (alta) con confirmación
+// U-061: Favorito (alta) con confirmación - LÍNEAS
 async function agregarLineaFavorita(lineaId) {
     const linea = sitData.lineas.find(l => l.id === lineaId);
     if (!linea) return;
@@ -266,7 +291,8 @@ async function agregarLineaFavorita(lineaId) {
     const elemento = {
         nombre: `${linea.nombre} - ${linea.destino}`,
         tipo: 'LÍNEA',
-        idElemento: lineaId
+        idElemento: lineaId,
+        tipoElemento: 'linea'
     };
 
     // Verificar duplicados (U-061)
@@ -286,7 +312,8 @@ async function agregarLineaFavorita(lineaId) {
         // Añadir a favoritos con fecha
         sitData.favoritos.push({
             id: 'fav' + Date.now(),
-            tipo: 'linea',
+            tipo: 'LÍNEA',
+            tipoElemento: 'linea',
             idElemento: lineaId,
             nombre: elemento.nombre,
             fechaGuardado: new Date().toLocaleString('es-ES')
@@ -294,6 +321,75 @@ async function agregarLineaFavorita(lineaId) {
 
         dialogSystem.mostrarFavoritoAñadido();
         cargarFavoritos();
+    }
+}
+
+// U-061: Favorito (alta) con confirmación - PARADAS
+async function agregarParadaFavorita(lineaId, nombreParada) {
+    const linea = sitData.lineas.find(l => l.id === lineaId);
+    if (!linea) return;
+
+    const elemento = {
+        nombre: `${nombreParada} (${linea.nombre})`,
+        tipo: 'PARADA',
+        idElemento: lineaId,
+        nombreParada: nombreParada,
+        tipoElemento: 'parada'
+    };
+
+    // Verificar duplicados
+    const duplicado = sitData.favoritos.some(f =>
+        f.tipo === 'PARADA' && f.nombreParada === nombreParada
+    );
+
+    if (duplicado) {
+        dialogSystem.mostrarFavoritoDuplicado();
+        return;
+    }
+
+    // Confirmar añadir
+    const confirmar = await dialogSystem.confirmarAgregarFavorito(elemento);
+
+    if (confirmar) {
+        // Añadir a favoritos
+        sitData.favoritos.push({
+            id: 'fav' + Date.now(),
+            tipo: 'PARADA',
+            tipoElemento: 'parada',
+            idElemento: lineaId,
+            nombreParada: nombreParada,
+            nombre: elemento.nombre,
+            fechaGuardado: new Date().toLocaleString('es-ES')
+        });
+
+        dialogSystem.mostrarFavoritoAñadido();
+        cargarFavoritos();
+    }
+}
+
+// Navegar a favorito clickeado
+function irAFavorito(index) {
+    console.log('>>> irAFavorito llamado con index:', index);
+    const favorito = sitData.favoritos[index];
+    console.log('>>> Favorito encontrado:', favorito);
+
+    if (!favorito) {
+        console.error('>>> No se encontró el favorito en el índice:', index);
+        return;
+    }
+
+    // Si es una línea, ir a detalle de línea
+    if (favorito.tipoElemento === 'linea') {
+        console.log('>>> Navegando a línea:', favorito.idElemento);
+        mostrarDetalleLinea(favorito.idElemento);
+    }
+    // Si es parada, ir a detalle de línea donde está la parada
+    else if (favorito.tipoElemento === 'parada') {
+        console.log('>>> Navegando a parada en línea:', favorito.idElemento);
+        mostrarDetalleLinea(favorito.idElemento);
+    }
+    else {
+        console.error('>>> Tipo de elemento no reconocido:', favorito.tipoElemento);
     }
 }
 

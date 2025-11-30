@@ -922,6 +922,13 @@ body {
     justify-content: space-between;
     align-items: center;
     box-shadow: var(--sombra-tarjeta);
+    transition: all 0.3s ease;
+}
+
+.favorito-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    border-color: var(--color-principal);
 }
 
 .favorito-info h4 {

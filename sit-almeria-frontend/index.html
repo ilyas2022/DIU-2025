@@ -473,27 +473,53 @@
         <div class="page-navbar"></div>
 
         <main class="page-content">
-            <div class="page-title">
-                <h2>Planificador de Viajes</h2>
-                <p>Encuentra la mejor ruta para tu destino</p>
+            <div class="page-title" style="text-align: center; margin-bottom: 30px;">
+                <div style="display: flex; align-items: center; gap: 16px; justify-content: center; margin-bottom: 10px;">
+                    <svg class="page-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 48px; height: 48px; color: var(--color-principal);">
+                        <!-- IC04: Tiempo/ETA -->
+                        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="18" cy="6" r="1.5"/>
+                        <circle cx="20" cy="9" r="1"/>
+                        <circle cx="21" cy="12" r="0.8"/>
+                    </svg>
+                    <h2>Planificador de Viajes</h2>
+                </div>
+                <p style="color: #666;">Encuentra la mejor ruta para tu destino</p>
             </div>
 
-            <div class="planificador-form">
-                <div class="form-group">
-                    <label>Origen</label>
-                    <input type="text" id="origen-input" class="form-input" placeholder="Ej: Puerta de Purchena">
+            <div class="planificador-form" style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-right: 6px; color: #6CABEF;">
+                            <circle cx="12" cy="12" r="10"/>
+                        </svg>
+                        Origen
+                    </label>
+                    <input type="text" id="origen-input" class="form-input" placeholder="Ej: Puerta de Purchena" style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; transition: all 0.3s;">
                 </div>
 
-                <div class="form-group">
-                    <label>Destino</label>
-                    <input type="text" id="destino-input" class="form-input" placeholder="Ej: Universidad">
+                <div class="form-group" style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">
+                        <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-right: 6px; color: #E85858;">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        Destino
+                    </label>
+                    <input type="text" id="destino-input" class="form-input" placeholder="Ej: Universidad" style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; transition: all 0.3s;">
                 </div>
 
-                <button class="btn-primary" onclick="buscarRuta()">Buscar Rutas</button>
+                <button class="btn-primary" onclick="buscarRuta()" style="width: 100%; padding: 14px; font-size: 16px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.3s;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                    Buscar Rutas
+                </button>
             </div>
 
-            <div class="resultados-container" id="resultados-rutas" style="display: none;">
-                <h3>Rutas disponibles</h3>
+            <div class="resultados-container" id="resultados-rutas" style="display: none; margin-top: 30px;">
+                <h3 style="text-align: center; color: #6CABEF; margin-bottom: 20px;">Rutas disponibles</h3>
                 <div class="rutas-list" id="rutas-list">
                     <!-- Se carga dinámicamente -->
                 </div>
@@ -511,18 +537,18 @@
         <div class="page-navbar"></div>
 
         <main class="page-content">
-            <div class="page-title">
-                <div style="display: flex; align-items: center; gap: 16px; justify-content: center;">
+            <div class="page-title" style="text-align: center; margin-bottom: 30px;">
+                <div style="display: flex; align-items: center; gap: 16px; justify-content: center; margin-bottom: 10px;">
                     <svg class="page-icon" viewBox="0 0 24 24" fill="var(--color-acento)" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px;">
                         <!-- IC06: Favoritos/Estrella -->
                         <path d="M12 2 L15 8.5 L22 9.5 L17 14.5 L18.5 21.5 L12 18 L5.5 21.5 L7 14.5 L2 9.5 L9 8.5 Z"/>
                     </svg>
                     <h2>Mis Favoritos</h2>
                 </div>
-                <p>Paradas y líneas guardadas</p>
+                <p style="color: #666;">Haz clic en un favorito para ver sus detalles</p>
             </div>
 
-            <div class="favoritos-list" id="favoritos-list">
+            <div class="favoritos-list" id="favoritos-list" style="display: flex; flex-direction: column; gap: 15px;">
                 <!-- Los favoritos se cargarán dinámicamente -->
             </div>
         </main>

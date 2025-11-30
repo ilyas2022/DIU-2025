@@ -197,9 +197,9 @@ const sitData = {
 
     // Favoritos del usuario
     favoritos: [
-        { id: "fav1", tipo: "parada", idElemento: 101, nombre: "Universidad (Campus)" },
-        { id: "fav2", tipo: "parada", idElemento: 103, nombre: "Puerta de Purchena" },
-        { id: "fav3", tipo: "linea", idElemento: 1, nombre: "Línea 1 - Universidad - El Zapillo" }
+        { id: "fav1", tipo: "PARADA", tipoElemento: "parada", idElemento: 1, nombreParada: "Universidad (Campus)", nombre: "Universidad (Campus) (Línea 1)" },
+        { id: "fav2", tipo: "PARADA", tipoElemento: "parada", idElemento: 1, nombreParada: "Puerta de Purchena", nombre: "Puerta de Purchena (Línea 1)" },
+        { id: "fav3", tipo: "LÍNEA", tipoElemento: "linea", idElemento: 1, nombre: "Línea 1 - Universidad - El Zapillo" }
     ],
 
     // Historial de recargas
