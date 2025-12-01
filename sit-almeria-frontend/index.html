@@ -616,9 +616,8 @@
                     </div>
                 </div>
 
-                <div class="perfil-actions" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px;">
+                <div class="perfil-actions" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px;">
                     <button class="btn-secondary" onclick="showPage('recarga')">Recargar tarjeta</button>
-                    <button class="btn-secondary" onclick="cambiarContrasena()">Cambiar contraseña</button>
                     <button class="btn-secondary" onclick="showPage('recuperar-contrasena')">He olvidado mi contraseña</button>
                     <button class="btn-secondary" onclick="cerrarSesion()">Cerrar sesión</button>
                 </div>
@@ -641,31 +640,8 @@
                 <p>Recarga tu tarjeta de forma segura</p>
             </div>
 
-            <div class="recarga-form">
-                <div class="form-group">
-                    <label>Tarjeta asociada</label>
-                    <input type="text" class="form-input" value="TC98765432" readonly>
-                </div>
-
-                <div class="form-group">
-                    <label>Importe a recargar</label>
-                    <input type="number" id="importe-recarga" class="form-input" placeholder="Ej: 20.00" min="5" max="100" step="0.50">
-                </div>
-
-                <div class="form-group">
-                    <label>Método de pago</label>
-                    <select class="form-input" id="metodo-pago">
-                        <option value="tarjeta">Tarjeta bancaria</option>
-                        <option value="bizum">Bizum</option>
-                        <option value="paypal">PayPal</option>
-                    </select>
-                </div>
-
-                <div class="info-box">
-                    <p>La operación se realizará en una pasarela de pago segura.</p>
-                </div>
-
-                <button class="btn-primary" onclick="procesarRecarga()">Continuar al pago</button>
+            <div class="recarga-form" id="recarga-form-container">
+                <!-- Se carga dinámicamente según si hay tarjeta o no -->
             </div>
         </main>
 
@@ -849,7 +825,7 @@
                     <p>Accede a la opción <strong>Recargas</strong>.</p>
                     <ul>
                         <li>Si tienes tarjeta asociada, introduce el importe y método de pago.</li>
-                        <li>Si no tienes tarjeta asociada, el sistema te pedirá vincular una antes de continuar.</li>
+                        <li>Si no tienes tarjeta asociada, primero debes vincular una. El sistema te mostrará un formulario para introducir el número de tu tarjeta física (formato: TC seguido de 8 dígitos).</li>
                     </ul>
                 </div>
 

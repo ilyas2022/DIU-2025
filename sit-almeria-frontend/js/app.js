@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarAvisos();
     cargarFavoritos();
     cargarPerfil();
+    cargarFormularioRecarga();
 });
 
 // Cargar templates en todas las páginas
@@ -493,6 +494,113 @@ function buscarRuta() {
 
 // ========== RECARGA ==========
 
+// Cargar formulario de recarga según si hay tarjeta asociada o no
+function cargarFormularioRecarga() {
+    const container = document.getElementById('recarga-form-container');
+    if (!container) return;
+
+    const tieneTarjeta = sitData.usuario.tarjetaId && sitData.usuario.tarjetaId.trim() !== '';
+
+    if (tieneTarjeta) {
+        // Formulario de recarga normal
+        container.innerHTML = `
+            <div class="form-group">
+                <label>Tarjeta asociada</label>
+                <input type="text" class="form-input" value="${sitData.usuario.tarjetaId}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Importe a recargar</label>
+                <input type="number" id="importe-recarga" class="form-input" placeholder="Ej: 20.00" min="5" max="100" step="0.50">
+            </div>
+
+            <div class="form-group">
+                <label>Método de pago</label>
+                <select class="form-input" id="metodo-pago">
+                    <option value="tarjeta">Tarjeta bancaria</option>
+                    <option value="bizum">Bizum</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+
+            <div class="info-box">
+                <p>La operación se realizará en una pasarela de pago segura.</p>
+            </div>
+
+            <button class="btn-primary" onclick="procesarRecarga()">Continuar al pago</button>
+        `;
+    } else {
+        // Formulario de vinculación de tarjeta
+        container.innerHTML = `
+            <div class="info-box" style="background-color: #fff3cd; border-color: #ffc107; color: #856404; margin-bottom: 20px;">
+                <p><strong>No tienes ninguna tarjeta asociada</strong></p>
+                <p>Para poder recargar, primero debes vincular una tarjeta de transporte.</p>
+            </div>
+
+            <div class="form-group">
+                <label>Número de tarjeta de transporte</label>
+                <input type="text" id="nueva-tarjeta" class="form-input" placeholder="Ej: TC12345678" maxlength="10">
+                <small style="color: #666; display: block; margin-top: 5px;">Introduce el número de 10 dígitos que aparece en tu tarjeta física</small>
+            </div>
+
+            <button class="btn-primary" onclick="vincularTarjeta()">Vincular tarjeta</button>
+        `;
+    }
+}
+
+// Función para vincular una nueva tarjeta
+async function vincularTarjeta() {
+    const tarjetaInput = document.getElementById('nueva-tarjeta');
+
+    // Limpiar errores
+    tarjetaInput.parentElement.classList.remove('error');
+    const errorEl = tarjetaInput.parentElement.querySelector('.validation-message');
+    if (errorEl) errorEl.remove();
+
+    const numeroTarjeta = tarjetaInput.value.trim();
+
+    // Validaciones
+    if (!numeroTarjeta) {
+        mostrarError(tarjetaInput.parentElement, 'Introduce el número de tarjeta');
+        return;
+    }
+
+    if (!/^TC\d{8}$/.test(numeroTarjeta)) {
+        mostrarError(tarjetaInput.parentElement, 'El formato debe ser TC seguido de 8 dígitos (ej: TC12345678)');
+        return;
+    }
+
+    // Confirmar vinculación
+    const confirmar = await new Promise((resolve) => {
+        dialogSystem.showDialog({
+            title: 'Vincular tarjeta',
+            message: `¿Confirmar vinculación de la tarjeta ${numeroTarjeta}?\n\nEsta tarjeta quedará asociada a tu cuenta.`,
+            confirmText: 'Vincular',
+            cancelText: 'Cancelar',
+            onConfirm: () => resolve(true),
+            onCancel: () => resolve(false)
+        });
+    });
+
+    if (!confirmar) return;
+
+    // Simular vinculación exitosa
+    setTimeout(() => {
+        sitData.usuario.tarjetaId = numeroTarjeta;
+
+        dialogSystem.showDialog({
+            title: 'Tarjeta vinculada',
+            message: `La tarjeta ${numeroTarjeta} ha sido vinculada correctamente a tu cuenta.\n\nYa puedes realizar recargas.`,
+            type: 'success',
+            confirmText: 'Continuar',
+            onConfirm: () => {
+                cargarFormularioRecarga();
+                cargarPerfil();
+            }
+        });
+    }, 800);
+}
+
 // U-070, U-071, U-073: Procesar recarga con validación completa
 async function procesarRecarga() {
     const importeInput = document.getElementById('importe-recarga');
@@ -976,6 +1084,7 @@ window.mostrarDetalleLinea = mostrarDetalleLinea;
 window.agregarLineaFavorita = agregarLineaFavorita;
 window.eliminarFavorito = eliminarFavorito;
 window.buscarRuta = buscarRuta;
+window.vincularTarjeta = vincularTarjeta;
 window.procesarRecarga = procesarRecarga;
 window.enviarMensaje = enviarMensaje;
 window.cerrarSesion = cerrarSesion;
