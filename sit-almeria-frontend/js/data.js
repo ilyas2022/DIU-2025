@@ -189,7 +189,7 @@ const sitData = {
         email: "maria.garcia@example.com",
         telefono: "650123456",
         saldo: 15.75,
-        tarjetaId: "TC98765432",
+        tarjetaId: "", // Sin tarjeta asociada inicialmente
         bonosActivos: ["Bono Mensual"],
         fechaRegistro: "15/03/2024 10:30:00",
         ultimaModificacion: "20/11/2025 14:25:00"
