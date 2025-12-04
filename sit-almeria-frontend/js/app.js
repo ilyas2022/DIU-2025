@@ -956,7 +956,7 @@ window.editarPerfil = function() {
 
     if (!nombreEl || !emailEl || !telefonoEl) {
         console.error('No se encontraron los elementos del perfil');
-        alert('Error: No se pudieron cargar los datos del perfil');
+        dialogSystem.mostrarError('No se pudieron cargar los datos del perfil. Por favor recarga la página.');
         return;
     }
 
@@ -968,17 +968,18 @@ window.editarPerfil = function() {
 
     // Crear formulario de edición
     const formHtml = `
-        <div class="form-group">
+        <div class="form-group" id="nombre-group">
             <label>Nombre completo</label>
             <input type="text" id="edit-nombre" class="form-input" value="${nombre}">
         </div>
-        <div class="form-group">
+        <div class="form-group" id="email-group">
             <label>Correo electrónico</label>
             <input type="email" id="edit-email" class="form-input" value="${email}">
         </div>
-        <div class="form-group">
+        <div class="form-group" id="telefono-group">
             <label>Teléfono</label>
-            <input type="tel" id="edit-telefono" class="form-input" value="${telefono}">
+            <input type="tel" id="edit-telefono" class="form-input" value="${telefono}" maxlength="9" pattern="[0-9]{9}" placeholder="9 dígitos">
+            <small style="color: #666; display: block; margin-top: 5px;">Debe tener exactamente 9 dígitos</small>
         </div>
     `;
 
@@ -997,6 +998,28 @@ window.editarPerfil = function() {
     `;
     document.body.appendChild(dialog);
 
+    // Añadir validación en tiempo real para el campo de teléfono
+    const telefonoInput = document.getElementById('edit-telefono');
+    if (telefonoInput) {
+        telefonoInput.addEventListener('input', function(e) {
+            // Eliminar cualquier carácter que no sea un dígito
+            this.value = this.value.replace(/[^0-9]/g, '');
+
+            // Limitar a 9 dígitos
+            if (this.value.length > 9) {
+                this.value = this.value.slice(0, 9);
+            }
+        });
+
+        // Prevenir pegado de texto no numérico
+        telefonoInput.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+            const cleanedText = pastedText.replace(/[^0-9]/g, '').slice(0, 9);
+            this.value = cleanedText;
+        });
+    }
+
     console.log('Diálogo de edición creado');
 };
 
@@ -1012,25 +1035,57 @@ window.cerrarDialogoEdicion = function() {
 window.guardarCambiosPerfil = function() {
     console.log('Guardando cambios del perfil...');
 
-    const nuevoNombre = document.getElementById('edit-nombre').value.trim();
-    const nuevoEmail = document.getElementById('edit-email').value.trim();
-    const nuevoTelefono = document.getElementById('edit-telefono').value.trim();
+    const nombreInput = document.getElementById('edit-nombre');
+    const emailInput = document.getElementById('edit-email');
+    const telefonoInput = document.getElementById('edit-telefono');
+
+    const nuevoNombre = nombreInput.value.trim();
+    const nuevoEmail = emailInput.value.trim();
+    const nuevoTelefono = telefonoInput.value.trim();
 
     console.log('Nuevos datos:', {nuevoNombre, nuevoEmail, nuevoTelefono});
 
-    // Validaciones básicas
-    if (!nuevoNombre || !nuevoEmail || !nuevoTelefono) {
-        alert('Todos los campos son obligatorios');
-        return;
+    // Limpiar errores previos
+    const nombreGroup = document.getElementById('nombre-group');
+    const emailGroup = document.getElementById('email-group');
+    const telefonoGroup = document.getElementById('telefono-group');
+
+    limpiarErrorPerfil(nombreGroup);
+    limpiarErrorPerfil(emailGroup);
+    limpiarErrorPerfil(telefonoGroup);
+
+    let valid = true;
+
+    // Validar nombre
+    if (!nuevoNombre) {
+        mostrarErrorPerfil(nombreGroup, 'El nombre completo es obligatorio');
+        valid = false;
+    } else if (nuevoNombre.length < 3) {
+        mostrarErrorPerfil(nombreGroup, 'El nombre debe tener al menos 3 caracteres');
+        valid = false;
     }
 
-    if (nuevoNombre.length < 3) {
-        alert('El nombre debe tener al menos 3 caracteres');
-        return;
+    // Validar email
+    if (!nuevoEmail) {
+        mostrarErrorPerfil(emailGroup, 'El correo electrónico es obligatorio');
+        valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(nuevoEmail)) {
+        mostrarErrorPerfil(emailGroup, 'Introduce un correo electrónico válido');
+        valid = false;
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(nuevoEmail)) {
-        alert('Introduce un correo electrónico válido');
+    // Validar teléfono
+    if (!nuevoTelefono) {
+        mostrarErrorPerfil(telefonoGroup, 'El número de teléfono es obligatorio');
+        valid = false;
+    } else if (!/^\d{9}$/.test(nuevoTelefono)) {
+        console.error('Teléfono inválido:', nuevoTelefono, 'longitud:', nuevoTelefono.length);
+        mostrarErrorPerfil(telefonoGroup, 'El número de teléfono debe tener exactamente 9 dígitos');
+        valid = false;
+    }
+
+    if (!valid) {
+        console.error('Validación fallida. No se guardará el perfil.');
         return;
     }
 
@@ -1059,12 +1114,30 @@ window.guardarCambiosPerfil = function() {
             message: 'Tus datos han sido actualizados correctamente.',
             type: 'success'
         });
-    } else {
-        alert('Perfil actualizado correctamente');
     }
 
     console.log('Cambios guardados exitosamente');
 };
+
+// Mostrar error en el diálogo de perfil
+function mostrarErrorPerfil(formGroup, mensaje) {
+    formGroup.classList.add('error');
+
+    const errorMsg = document.createElement('span');
+    errorMsg.className = 'validation-message';
+    errorMsg.textContent = mensaje;
+
+    formGroup.appendChild(errorMsg);
+}
+
+// Limpiar error en el diálogo de perfil
+function limpiarErrorPerfil(formGroup) {
+    formGroup.classList.remove('error');
+    const errorMsg = formGroup.querySelector('.validation-message');
+    if (errorMsg) {
+        errorMsg.remove();
+    }
+}
 
 // ========== UTILIDADES ==========
 

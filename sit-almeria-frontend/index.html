@@ -986,7 +986,7 @@
 
             if (!nombreEl || !emailEl || !telefonoEl) {
                 console.error('Error: No se encontraron los elementos del perfil');
-                alert('Error: No se pudieron cargar los datos del perfil. Por favor recarga la página.');
+                dialogSystem.mostrarError('No se pudieron cargar los datos del perfil. Por favor recarga la página.');
                 return;
             }
 
@@ -1014,7 +1014,8 @@
                     </div>
                     <div style="margin-bottom: 20px;">
                         <label style="display: block; margin-bottom: 5px; font-weight: 600;">Teléfono</label>
-                        <input type="tel" id="edit-telefono" class="form-input" value="${telefono}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                        <input type="tel" id="edit-telefono" class="form-input" value="${telefono}" maxlength="9" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                        <small style="color: #666; display: block; margin-top: 5px;">Debe tener exactamente 9 dígitos</small>
                     </div>
                     <div class="dialog-actions" style="display: flex; gap: 10px; justify-content: flex-end;">
                         <button class="btn-secondary" onclick="cerrarDialogoEdicion()" style="padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; background: #6c757d; color: white;">Cancelar</button>
@@ -1025,6 +1026,28 @@
 
             document.body.appendChild(dialog);
             console.log('>>> Diálogo de edición creado y mostrado');
+
+            // Añadir validación en tiempo real para el campo de teléfono
+            const telefonoInput = document.getElementById('edit-telefono');
+            if (telefonoInput) {
+                telefonoInput.addEventListener('input', function(e) {
+                    // Eliminar cualquier carácter que no sea un dígito
+                    this.value = this.value.replace(/[^0-9]/g, '');
+
+                    // Limitar a 9 dígitos
+                    if (this.value.length > 9) {
+                        this.value = this.value.slice(0, 9);
+                    }
+                });
+
+                // Prevenir pegado de texto no numérico
+                telefonoInput.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+                    const cleanedText = pastedText.replace(/[^0-9]/g, '').slice(0, 9);
+                    this.value = cleanedText;
+                });
+            }
         }
 
         function cerrarDialogoEdicion() {
@@ -1046,17 +1069,23 @@
 
             // Validaciones
             if (!nuevoNombre || !nuevoEmail || !nuevoTelefono) {
-                alert('⚠️ Todos los campos son obligatorios');
+                dialogSystem.mostrarError('Todos los campos son obligatorios');
                 return;
             }
 
             if (nuevoNombre.length < 3) {
-                alert('⚠️ El nombre debe tener al menos 3 caracteres');
+                dialogSystem.mostrarError('El nombre debe tener al menos 3 caracteres');
                 return;
             }
 
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(nuevoEmail)) {
-                alert('⚠️ Introduce un correo electrónico válido');
+                dialogSystem.mostrarError('Introduce un correo electrónico válido');
+                return;
+            }
+
+            // Validar teléfono - exactamente 9 dígitos
+            if (!/^\d{9}$/.test(nuevoTelefono)) {
+                dialogSystem.mostrarError('El número de teléfono debe tener exactamente 9 dígitos');
                 return;
             }
 
@@ -1077,7 +1106,7 @@
             cerrarDialogoEdicion();
 
             // Mostrar confirmación
-            alert('✅ Perfil actualizado correctamente');
+            dialogSystem.mostrarPerfilGuardado();
             console.log('>>> Perfil guardado exitosamente');
         }
 
@@ -1132,27 +1161,27 @@
 
             // Validaciones
             if (!currentPassword) {
-                alert('⚠️ Introduce tu contraseña actual');
+                dialogSystem.mostrarError('Introduce tu contraseña actual');
                 return;
             }
 
             if (!newPassword) {
-                alert('⚠️ Introduce la nueva contraseña');
+                dialogSystem.mostrarError('Introduce la nueva contraseña');
                 return;
             }
 
             if (newPassword.length < 8) {
-                alert('⚠️ La nueva contraseña debe tener al menos 8 caracteres');
+                dialogSystem.mostrarError('La nueva contraseña debe tener al menos 8 caracteres');
                 return;
             }
 
             if (newPassword !== confirmPassword) {
-                alert('⚠️ Las contraseñas no coinciden');
+                dialogSystem.mostrarError('Las contraseñas no coinciden');
                 return;
             }
 
             if (currentPassword === newPassword) {
-                alert('⚠️ La nueva contraseña debe ser diferente a la actual');
+                dialogSystem.mostrarError('La nueva contraseña debe ser diferente a la actual');
                 return;
             }
 
@@ -1160,12 +1189,12 @@
             cerrarDialogoContrasena();
 
             // Mostrar confirmación
-            alert('✅ Contraseña cambiada correctamente\n\nPor seguridad, se cerrará tu sesión.');
-
-            // Simular cierre de sesión
-            setTimeout(function() {
-                showPage('login');
-            }, 1000);
+            dialogSystem.showDialog({
+                title: 'Contraseña cambiada',
+                message: 'Contraseña cambiada correctamente\n\nPor seguridad, se cerrará tu sesión.',
+                type: 'success',
+                onConfirm: () => showPage('login')
+            });
 
             console.log('>>> Contraseña cambiada exitosamente');
         }
@@ -1309,5 +1338,81 @@
             }
         };
     </script>
+
+    <!-- ============================================ -->
+    <!--              CHATBOT INTERACTIVO             -->
+    <!-- ============================================ -->
+    <div id="chatbot-container">
+        <!-- Botón flotante para abrir/cerrar el chat -->
+        <button id="chatbot-toggle" class="chatbot-toggle" onclick="toggleChatbot()">
+            <svg id="chat-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 28px; height: 28px;">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+                <circle cx="8" cy="10" r="1.5"/>
+                <circle cx="12" cy="10" r="1.5"/>
+                <circle cx="16" cy="10" r="1.5"/>
+            </svg>
+            <svg id="close-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 28px; height: 28px; display: none;">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+        </button>
+
+        <!-- Ventana del chat -->
+        <div id="chatbot-window" class="chatbot-window">
+            <div class="chatbot-header">
+                <div>
+                    <h3 style="margin: 0; font-size: 1.125rem;">Asistente SIT</h3>
+                    <p style="margin: 0; font-size: 0.75rem; opacity: 0.9;">¿En qué puedo ayudarte?</p>
+                </div>
+            </div>
+
+            <div id="chatbot-messages" class="chatbot-messages">
+                <div class="chatbot-message bot-message">
+                    <div class="message-content">
+                        ¡Hola! Soy tu asistente virtual de SIT-Almería. Estoy aquí para ayudarte con cualquier duda sobre:
+                        <ul style="margin: 8px 0 0 0; padding-left: 20px;">
+                            <li>Líneas y horarios de autobuses</li>
+                            <li>Bonos y tarifas</li>
+                            <li>Recarga de tarjetas</li>
+                            <li>Planificación de rutas</li>
+                            <li>Incidencias y avisos</li>
+                        </ul>
+                        ¿Qué necesitas saber?
+                    </div>
+                </div>
+            </div>
+
+            <div class="chatbot-quick-replies">
+                <button class="quick-reply-btn" onclick="enviarMensajeRapido('¿Cuáles son las líneas disponibles?')">
+                    Líneas disponibles
+                </button>
+                <button class="quick-reply-btn" onclick="enviarMensajeRapido('¿Cómo recargar mi tarjeta?')">
+                    Recargar tarjeta
+                </button>
+                <button class="quick-reply-btn" onclick="enviarMensajeRapido('¿Qué bonos hay?')">
+                    Ver bonos
+                </button>
+                <button class="quick-reply-btn" onclick="enviarMensajeRapido('¿Cómo planificar una ruta?')">
+                    Planificar ruta
+                </button>
+            </div>
+
+            <div class="chatbot-input-container">
+                <input
+                    type="text"
+                    id="chatbot-input"
+                    class="chatbot-input"
+                    placeholder="Escribe tu pregunta..."
+                    onkeypress="if(event.key === 'Enter') enviarMensajeChatbot()"
+                >
+                <button class="chatbot-send-btn" onclick="enviarMensajeChatbot()">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/chatbot.js"></script>
 </body>
 </html>
